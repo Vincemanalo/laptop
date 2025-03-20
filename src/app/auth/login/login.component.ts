@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FeaturesService } from '../../features/features.service';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,15 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   @ViewChild('usernameInput') usernameInput!: ElementRef;
   @ViewChild('passwordInput') passwordInput!: ElementRef;
+
+  email: string = '';
+  password: string = '';
   errorMessage: string = '';
 
-  // Mock user credentials
-  private mockUsers = [
-    { username: 'jonapogs', password: '1234' },
-    { username: 'user', password: 'user123' },
-  ];
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private featuresService: FeaturesService,
+    private zone: NgZone) {}
 
   login() {
     const username = this.usernameInput.nativeElement.value;
@@ -37,4 +38,11 @@ export class LoginComponent {
       this.errorMessage = 'Invalid username or password';
     }
   }
+
+    // Mock user credentials
+    private mockUsers = [
+      { username: 'jonapogs', password: '1234' },
+      { username: 'user', password: 'user123' },
+    ];
+  
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {
   FormBuilder,
@@ -10,6 +10,11 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../../features/features.service';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 interface Employee {
   _id: string;
@@ -21,7 +26,18 @@ interface Employee {
 
 @Component({
   selector: 'app-addemp',
-  imports: [ReactiveFormsModule, CommonModule, MatIconModule, FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatIconModule,
+    FormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ], changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './addemp.component.html',
   styleUrls: ['./addemp.component.css'],
   standalone: true,

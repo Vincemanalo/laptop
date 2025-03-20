@@ -83,9 +83,15 @@ h2 {
 /* Button Styles */
 .button-group {
   display: flex;
-  justify-content: center;
+  position: absolute;
+  bottom: 3em;
+  right: 35px;
   gap: 10px;
-  margin-top: 15px;
+  margin-right: 100%px;
+}
+
+.button-group button {
+  padding: 8px 16px;
 }
 
 button[type="submit"] {
@@ -119,6 +125,20 @@ button[type="submit"]:disabled {
 
 .cancel-btn:hover {
   background-color: #c82333;
+}
+
+@media (max-width: 600px) {
+  .mat-form-field {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 601px) {
+  .mat-form-field {
+    width: 50%;
+    max-width: 400px;
+  }
 }
 
 @keyframes fadeIn {

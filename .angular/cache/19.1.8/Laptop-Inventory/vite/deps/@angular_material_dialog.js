@@ -4,14 +4,23 @@ import {
   OverlayContainer,
   OverlayModule,
   OverlayRef
-} from "./chunk-HJYPCV6J.js";
+} from "./chunk-SFUU4ITO.js";
+import "./chunk-OIBNGD5S.js";
 import {
   BasePortalOutlet,
   CdkPortalOutlet,
   ComponentPortal,
   PortalModule,
   TemplatePortal
-} from "./chunk-5ISSPAJO.js";
+} from "./chunk-6D7COMZS.js";
+import "./chunk-5VIT66DC.js";
+import {
+  CdkScrollable
+} from "./chunk-UF2BG466.js";
+import "./chunk-LU4EJB5N.js";
+import "./chunk-SZS4RJEH.js";
+import "./chunk-UU5Z7QKS.js";
+import "./chunk-BKGN3QIE.js";
 import {
   A11yModule,
   ESCAPE,
@@ -20,20 +29,19 @@ import {
   InteractivityChecker,
   MatCommonModule,
   _IdGenerator,
-  hasModifierKey
-} from "./chunk-QLPZ6FGS.js";
-import {
-  CdkScrollable
-} from "./chunk-CPCTL2Y3.js";
-import "./chunk-6CDYCS7M.js";
-import {
-  Platform,
   _getFocusedElementPierceShadowDom,
-  coerceNumberProperty
-} from "./chunk-OIYZKJAS.js";
+  hasModifierKey
+} from "./chunk-KGX2SZTL.js";
+import "./chunk-M3HR6BUY.js";
+import "./chunk-65RJ5ZZ2.js";
 import {
   Directionality
-} from "./chunk-R3IBUC5M.js";
+} from "./chunk-6I6QNIJ5.js";
+import "./chunk-C4NR7PDC.js";
+import {
+  Platform,
+  coerceNumberProperty
+} from "./chunk-M3MGRAEL.js";
 import {
   DOCUMENT
 } from "./chunk-3SE5A5SN.js";
@@ -939,7 +947,7 @@ var DialogModule = class _DialogModule {
   }], null, null);
 })();
 
-// node_modules/@angular/material/fesm2022/dialog.mjs
+// node_modules/@angular/material/fesm2022/module-b3de5709.mjs
 function MatDialogContainer_ng_template_2_Template(rf, ctx) {
 }
 var MatDialogConfig = class {
@@ -1858,6 +1866,8 @@ var MatDialogModule = class _MatDialogModule {
     }]
   }], null, null);
 })();
+
+// node_modules/@angular/material/fesm2022/dialog.mjs
 var _defaultParams = {
   params: {
     enterAnimationDuration: "150ms",

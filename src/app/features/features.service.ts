@@ -10,7 +10,7 @@ import { catchError, map, Observable, retry, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class FeaturesService {
-  private baseUrl = 'http://10.0.0.32:3000';
+  private baseUrl = 'http://10.0.0.33:3000';
 
   // private baseUrl = "https://67ce827a125cd5af757abfbb.mockapi.io/device/laptop";
 
@@ -21,7 +21,7 @@ export class FeaturesService {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `${token}`,
+        // Authorization: `${token}`,
       }),
     };
 

@@ -1,35 +1,53 @@
 import {
+  MatDivider,
+  MatDividerModule
+} from "./chunk-FBRQB5KV.js";
+import {
+  SelectionModel
+} from "./chunk-SUF2WYDA.js";
+import {
   NG_VALUE_ACCESSOR
 } from "./chunk-MB4ARZUM.js";
+import "./chunk-OIZAD6NR.js";
 import {
-  MatDividerModule
-} from "./chunk-HBK562WV.js";
+  MatPseudoCheckboxModule
+} from "./chunk-AN7M7VXT.js";
+import {
+  MAT_RIPPLE_GLOBAL_OPTIONS,
+  MatRippleModule,
+  RippleRenderer
+} from "./chunk-ORQ3Z75Y.js";
+import {
+  _StructuralStylesLoader
+} from "./chunk-AUM72QWO.js";
+import "./chunk-U6HIR6HO.js";
+import "./chunk-LU4EJB5N.js";
+import "./chunk-SZS4RJEH.js";
+import "./chunk-UU5Z7QKS.js";
+import {
+  coerceBooleanProperty
+} from "./chunk-BKGN3QIE.js";
 import {
   A,
   CdkObserveContent,
   ENTER,
   FocusKeyManager,
-  MAT_RIPPLE_GLOBAL_OPTIONS,
   MatCommonModule,
-  MatPseudoCheckboxModule,
-  MatRippleModule,
   ObserversModule,
-  RippleRenderer,
   SPACE,
-  _CdkPrivateStyleLoader,
-  _StructuralStylesLoader,
+  _getFocusedElementPierceShadowDom,
   hasModifierKey
-} from "./chunk-QLPZ6FGS.js";
+} from "./chunk-KGX2SZTL.js";
+import "./chunk-M3HR6BUY.js";
+import "./chunk-65RJ5ZZ2.js";
+import "./chunk-6I6QNIJ5.js";
 import {
-  SelectionModel
-} from "./chunk-6CDYCS7M.js";
+  _CdkPrivateStyleLoader
+} from "./chunk-C4NR7PDC.js";
 import {
   Platform,
-  _getFocusedElementPierceShadowDom,
-  coerceBooleanProperty,
   coerceNumberProperty
-} from "./chunk-OIYZKJAS.js";
-import "./chunk-R3IBUC5M.js";
+} from "./chunk-M3MGRAEL.js";
 import {
   NgTemplateOutlet
 } from "./chunk-3SE5A5SN.js";
@@ -1927,6 +1945,7 @@ export {
   MAT_NAV_LIST,
   MAT_SELECTION_LIST_VALUE_ACCESSOR,
   MatActionList,
+  MatDivider,
   MatList,
   MatListItem,
   MatListItemAvatar,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalComponent } from '../../core/modal/modal.component';
+import { ModalComponent } from '../../core/modallaptop/modal.component';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../features.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AddempComponent } from '../../core/addemp/addemp.component';
 import { UpdatesEmpComponent } from '../../core/updateemp/updateemp.component';
 import { DeleteEmpComponent } from '../../core/deleteemp/deleteemp.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 interface Employee {
   employee: string;
@@ -35,6 +36,7 @@ interface Employee {
     MatDialogModule,
     FormsModule,
     AddempComponent,
+    MatPaginatorModule,
   ],
   templateUrl: './usermanagement.component.html',
   styleUrl: './usermanagement.component.css',
@@ -98,6 +100,80 @@ export class UserManagementComponent implements OnInit {
       address: '654 Elm St, Austin, TX',
       teamcolor: 'Purple',
     },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+    {
+      employee: 'Robert Brown',
+      email: 'robertb@example.com',
+      contact: '222-333-4444',
+      employmentDate: new Date('2023-01-17'),
+      position: 'Cybersecurity Analyst',
+      address: '654 Elm St, Austin, TX',
+      teamcolor: 'Purple',
+    },
+
   ];
 
   isModalOpen = false;

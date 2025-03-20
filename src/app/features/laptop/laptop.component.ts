@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalComponent } from '../../core/modal/modal.component';
+import { ModalComponent } from '../../core/modallaptop/modal.component';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../features.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -111,69 +111,55 @@ export class LaptopComponent implements OnInit {
   }
 
   getLaptops(): void {
-    this.laptops = [
-      // {
-      //   laptopName: 'HP Inspiron 3501 Series',
-      //   laptopSerialNumber: '7KJ2PH3',
-      //   laptopDescription: 'New Laptop Dell (Mat Black)',
-      //   laptopPurchaseDate: new Date('December 20, 2021'),
-      //   laptopLocation: '1NK Center',
-      //   assignedTo: 'Sir Benjie',
-      //   laptopCondition: 'Working',
-      // },
-      // {
-      //   laptopName: 'Acer Inspiron 3501 Series',
-      //   laptopSerialNumber: '7KJ2PH3',
-      //   laptopDescription: 'New Laptop Dell (Mat Black)',
-      //   laptopPurchaseDate: new Date('December 20, 2021'),
-      //   laptopLocation: '1NK Center',
-      //   assignedTo: 'Sir Benjie',
-      //   laptopCondition: 'Working',
-      // },
-      // {
-      //   laptopName: 'Lenovo Inspiron 3501 Series',
-      //   laptopSerialNumber: '7KJ2PH3',
-      //   laptopDescription: 'New Laptop Dell (Mat Black)',
-      //   laptopPurchaseDate: new Date('December 20, 2021'),
-      //   laptopLocation: '1NK Center',
-      //   assignedTo: 'Sir Benjie',
-      //   laptopCondition: 'Working',
-      // },
-    ];
     this.FeaturesService.getAllLaptop().subscribe({
       next: (response) => {
-        this.laptops = response.filter((laptop: Laptop) =>
-          this.filterLaptops(laptop)
-        );
+        console.log('API Response:', response);
+  
+        // Ensure we are accessing the "laptops" array
+        if (response && response.laptops) {
+          this.laptops = response.laptops.filter((laptop: Laptop) =>
+            this.filterLaptops(laptop)
+          );
+        } else {
+          this.laptops = []; // Handle case where there are no laptops
+        }
+  
         console.log('Filtered Laptops:', this.laptops);
       },
       error: (error) => console.error('Error fetching laptops:', error),
     });
   }
+  
 
   // Fetch all employees and create a map of ID -> Name
   getEmployees(): void {
     this.FeaturesService.getAllEmployee().subscribe({
-      next: (response: { _id: string; employeeName: string }[]) => {
-        console.log('Employees response:', response); // Debugging log
-
-        this.employees = response;
-        this.employeeMap = response.reduce(
-          (
-            map: { [key: string]: string },
-            employee: { _id: string; employeeName: string }
-          ) => {
-            map[employee._id] = employee.employeeName; // Assign employee name to the map
+      next: (response: { _id: string; employeeName: string }[] | { data: { _id: string; employeeName: string }[] }) => {
+        console.log('Employees response:', response);
+        
+        // Determine if response is an array or an object with a data property.
+        const employeeArray = Array.isArray(response) ? response : response?.data ?? [];
+  
+        // Optionally, log employeeArray to verify its contents.
+        console.log('Employee Array:', employeeArray);
+  
+        // Use an empty array if employeeArray is undefined or null
+        this.employees = employeeArray;
+  
+        // Only call reduce if employeeArray is defined, otherwise default to an empty object.
+        this.employeeMap = (employeeArray || []).reduce(
+          (map: { [key: string]: string }, employee: { _id: string; employeeName: string }) => {
+            map[employee._id] = employee.employeeName;
             return map;
           },
           {}
         );
-        console.log('Employee Map:', this.employeeMap); // Debugging log
+        console.log('Employee Map:', this.employeeMap);
       },
       error: (error) => console.error('Error fetching employees:', error),
     });
   }
-
+    
   // Helper method to get Employee Name from ID
   getEmployeeName(_id: string): string {
     return this.employeeMap[_id] || 'Unknown';
@@ -184,7 +170,7 @@ export class LaptopComponent implements OnInit {
     if (!this.searchKeyword.trim()) {
       return true; // If no search keyword, return all laptops
     }
-
+    
     const keyword = this.searchKeyword.trim().toLowerCase();
     return (
       laptop.laptopName.toLowerCase().includes(keyword) ||

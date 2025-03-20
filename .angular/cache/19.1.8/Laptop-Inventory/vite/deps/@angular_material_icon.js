@@ -6,9 +6,11 @@ import {
 } from "./chunk-K7AXHIDZ.js";
 import {
   MatCommonModule
-} from "./chunk-QLPZ6FGS.js";
-import "./chunk-OIYZKJAS.js";
-import "./chunk-R3IBUC5M.js";
+} from "./chunk-KGX2SZTL.js";
+import "./chunk-M3HR6BUY.js";
+import "./chunk-6I6QNIJ5.js";
+import "./chunk-C4NR7PDC.js";
+import "./chunk-M3MGRAEL.js";
 import {
   DOCUMENT
 } from "./chunk-3SE5A5SN.js";
@@ -54,8 +56,7 @@ import {
   throwError
 } from "./chunk-S35MAB2V.js";
 
-// node_modules/@angular/material/fesm2022/icon.mjs
-var _c0 = ["*"];
+// node_modules/@angular/material/fesm2022/icon-registry-e1064d47.mjs
 var policy;
 function getPolicy() {
   if (policy === void 0) {
@@ -586,6 +587,9 @@ function iconKey(namespace, name) {
 function isSafeUrlWithOptions(value) {
   return !!(value.url && value.options);
 }
+
+// node_modules/@angular/material/fesm2022/icon-module-881c6455.mjs
+var _c0 = ["*"];
 var MAT_ICON_DEFAULT_OPTIONS = new InjectionToken("MAT_ICON_DEFAULT_OPTIONS");
 var MAT_ICON_LOCATION = new InjectionToken("mat-icon-location", {
   providedIn: "root",

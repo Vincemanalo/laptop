@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon style="color: white">menu</mat-icon>
   </button>
-  <span><strong>Laptop Inventory</strong></span>
+  <span><strong>{{ headerTitle }}</strong></span>
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
@@ -36,6 +36,13 @@
           <a mat-list-item routerLink="/main/laptop">
             <mat-icon>laptop</mat-icon> <strong>Laptops</strong>
           </a>
+          <a mat-list-item routerLink="/main/desktop">
+            <mat-icon>desktop_windows</mat-icon> <strong>Desktop</strong>
+          </a>
+          <a mat-list-item routerLink="/main/server">
+            <mat-icon>dns</mat-icon> <strong>Server</strong>
+          </a>
+
         </mat-nav-list>
       </mat-expansion-panel>
 

@@ -36,19 +36,7 @@
         <tbody>
           <tr *ngFor="let item of mockdata; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>
-              <select title="employee">
-                <option
-                  *ngFor="let employee of vincedata"
-                  [value]="employee.uid"
-                  [selected]="item.uid === employee.uid"
-                >
-                  {{ employee.name }}
-                </option>
-              </select>
-
-              <!-- {{ item.assigned_personel }} -->
-            </td>
+            <td>Justmyr Rodriguez</td>
             <td>{{ item.purchase_date }}</td>
             <td>{{ item.laptop_age }}</td>
             <td>

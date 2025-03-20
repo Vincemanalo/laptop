@@ -1,0 +1,121 @@
+<main id="main-content">
+  <section class="table-add-desktop">
+    <div class="parent-container">
+      <div class="dashboard-card">
+        <div class="toolbar">
+          <button id="open-modal" class="add-button" (click)="openModal()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="add_circle"
+            ></mat-icon>
+            <p>Add New Desktop</p>
+          </button>
+          <div class="search-container">
+            <input
+              matInput
+              type="text"
+              placeholder="Search..."
+              class="search-input"
+              [(ngModel)]="searchKeyword"
+            />
+            <button class="search-btn" (click)="onSearch()">
+              <mat-icon
+                class="search-btn"
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="search"
+              ></mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="table-container">
+          <table mat-table class="mat-elevation-z8" [dataSource]="desktops">
+            <ng-container matColumnDef="desktopName">
+              <th mat-header-cell *matHeaderCellDef>Desktop Name</th>
+              <td mat-cell *matCellDef="let desktop">{{ desktop.desktopName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="desktopSerialNumber">
+              <th mat-header-cell *matHeaderCellDef>Serial Number</th>
+              <td mat-cell *matCellDef="let desktop">
+                {{ desktop.desktopSerialNumber }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="desktopDescription">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let desktop">
+                {{ desktop.desktopDescription }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="desktopPurchaseDate">
+              <th mat-header-cell *matHeaderCellDef>Purchased Date</th>
+              <td mat-cell *matCellDef="let desktop">
+                {{ desktop.desktopPurchaseDate }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="desktopLocation">
+              <th mat-header-cell *matHeaderCellDef>Location</th>
+              <td mat-cell *matCellDef="let desktop">
+                {{ desktop.desktopLocation }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="assignedTo">
+              <th mat-header-cell *matHeaderCellDef>Assigned To</th>
+              <td mat-cell *matCellDef="let desktop">
+                {{ desktop.assignedTo }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="desktopCondition">
+              <th mat-header-cell *matHeaderCellDef>Condition</th>
+              <td mat-cell *matCellDef="let desktop">
+                {{ desktop.desktopCondition }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let desktop">
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="openEditModal(desktop)"
+                >
+                  Edit
+                </button>
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="openDeleteModal(desktop)"
+                >
+                  Delete
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-modal-desktop
+   *ngIf="isModalOpen" (closeModalEvent)="closeModal()"
+   ></app-modal-desktop>
+  <app-updates
+    *ngIf="isEditModalOpen"
+    (closeModalEvent)="closeEditModal()"
+  ></app-updates>
+  <app-delete
+    *ngIf="isDeleteModalOpen"
+    (closeModalEvent)="closeDeleteModal()"
+  ></app-delete>
+
+</main>
