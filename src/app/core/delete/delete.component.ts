@@ -36,6 +36,7 @@ interface Employee {
 export class DeleteComponent implements OnChanges {
   @Input() selectedLaptop: any = {}; // Receive data from parent component
   @Output() closeModalEvent = new EventEmitter<void>();
+  @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to p
   employees: Employee[] = []; // Store employees data
   selectedEmployeeId: string = ''; 
 
@@ -120,6 +121,8 @@ export class DeleteComponent implements OnChanges {
     this.featuresService.deleteLaptop(laptopId).subscribe({
       next: (response) => {
         console.log('Laptop deleted successfully:', response);
+        this.refreshTableEvent.emit(); // Emit event to refresh table
+
         this.closeModal(); // Close modal after deletion
       },
       error: (error) => {

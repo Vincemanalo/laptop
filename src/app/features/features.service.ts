@@ -10,7 +10,7 @@ import { catchError, map, Observable, retry, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class FeaturesService {
-  private baseUrl = 'http://10.0.0.33:3000';
+  private baseUrl = 'http://10.0.0.25:3000';
 
   // private baseUrl = "https://67ce827a125cd5af757abfbb.mockapi.io/device/laptop";
 
@@ -147,19 +147,24 @@ export class FeaturesService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
-  deleteLaptop(id: number): Observable<any> {
+  deleteLaptop(id: string): Observable<any> {
     const token = sessionStorage.getItem('auth_token');
+    const url = `${this.baseUrl}/device/laptop/${id}`;
+    console.log('DELETE Request URL:', url); // Debugging URL
+  
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       }),
+      body: { isDeleted: true }, // Some PATCH requests require a body
     };
-
+  
     return this.http
-      .put<any>(`${this.baseUrl}/${id}`, options)
+      .patch<any>(url, options)
       .pipe(retry(3), catchError(this.handleError));
   }
+  
 
   deleteEmployee(id: number): Observable<any> {
     const token = sessionStorage.getItem('auth_token');

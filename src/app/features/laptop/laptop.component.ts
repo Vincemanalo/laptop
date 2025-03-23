@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { UpdatesComponent } from '../../core/updates/updates.component';
 import { DeleteComponent } from '../../core/delete/delete.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 interface Laptop {
   laptopName: string;
@@ -34,9 +35,10 @@ interface Laptop {
     MatSelectModule,
     MatDialogModule,
     FormsModule,
+    MatPaginatorModule,
   ],
   templateUrl: './laptop.component.html',
-  styleUrl: './laptop.component.css',
+  styleUrls: ['./laptop.component.css'],  // Corrected to "styleUrls" (plural)
   standalone: true,
 })
 export class LaptopComponent implements OnInit {
@@ -52,45 +54,6 @@ export class LaptopComponent implements OnInit {
   ];
 
   laptops: Laptop[] = [];
-
-  // laptops: Laptop[] = [
-  //   {
-  //     id: 1,
-  //     name: "HP Inspiron 3501 Series",
-  //     purchasedDate: "December 20, 2021",
-  //     serialNumber: "7KJ2PH3",
-  //     description: "New Laptop Dell (Mat Black)",
-  //     location: "1NK Center",
-  //     assignedPersonnel: "Sir Benjie",
-  //     condition: "Working",
-  //     inspectionFrequency: "Quarterly",
-  //     inspectedBy: "Pogi si Kim Carl Buban",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Acer Inspiron 3501 Series",
-  //     purchasedDate: "December 20, 2021",
-  //     serialNumber: "7KJ2PH3",
-  //     description: "New Laptop Dell (Mat Black)",
-  //     location: "1NK Center",
-  //     assignedPersonnel: "Sir Benjie",
-  //     condition: "Working",
-  //     inspectionFrequency: "Quarterly",
-  //     inspectedBy: "Bolbi Cedric Lunar",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Lenovo Inspiron 3501 Series",
-  //     purchasedDate: "December 20, 2021",
-  //     serialNumber: "7KJ2PH3",
-  //     description: "New Laptop Dell (Mat Black)",
-  //     location: "1NK Center",
-  //     assignedPersonnel: "Sir Benjie",
-  //     condition: "Working",
-  //     inspectionFrequency: "Quarterly",
-  //     inspectedBy: "Bolbi Cedric Lunar",
-  //   },
-  // ];
   isModalOpen = false;
   isEditModalOpen = false;
   isDeleteModalOpen = false;
@@ -110,55 +73,55 @@ export class LaptopComponent implements OnInit {
     this.getLaptops();
   }
 
+  // Single getLaptops method: fetch from API and filter based on searchKeyword
   getLaptops(): void {
     this.FeaturesService.getAllLaptop().subscribe({
       next: (response) => {
         console.log('API Response:', response);
-  
-        // Ensure we are accessing the "laptops" array
+
         if (response && response.laptops) {
+          // Use the helper filter function to filter the laptops
           this.laptops = response.laptops.filter((laptop: Laptop) =>
             this.filterLaptops(laptop)
           );
         } else {
-          this.laptops = []; // Handle case where there are no laptops
+          this.laptops = [];
         }
-  
+
         console.log('Filtered Laptops:', this.laptops);
       },
       error: (error) => console.error('Error fetching laptops:', error),
     });
   }
-  
 
   // Fetch all employees and create a map of ID -> Name
-  getEmployees(): void {
-    this.FeaturesService.getAllEmployee().subscribe({
-      next: (response: { _id: string; employeeName: string }[] | { data: { _id: string; employeeName: string }[] }) => {
-        console.log('Employees response:', response);
-        
-        // Determine if response is an array or an object with a data property.
-        const employeeArray = Array.isArray(response) ? response : response?.data ?? [];
-  
-        // Optionally, log employeeArray to verify its contents.
-        console.log('Employee Array:', employeeArray);
-  
-        // Use an empty array if employeeArray is undefined or null
-        this.employees = employeeArray;
-  
-        // Only call reduce if employeeArray is defined, otherwise default to an empty object.
-        this.employeeMap = (employeeArray || []).reduce(
-          (map: { [key: string]: string }, employee: { _id: string; employeeName: string }) => {
-            map[employee._id] = employee.employeeName;
-            return map;
-          },
-          {}
-        );
-        console.log('Employee Map:', this.employeeMap);
-      },
-      error: (error) => console.error('Error fetching employees:', error),
-    });
-  }
+getEmployees(): void {
+  this.FeaturesService.getAllEmployee().subscribe({
+    next: (response) => {
+      console.log('Employees response:', response);
+
+      // Ensure we are extracting employees correctly
+      const employeeArray = response?.employees ?? []; // Correctly access 'employees'
+      console.log('Employee Array:', employeeArray);
+
+      // Store employees array for *ngFor
+      this.employees = employeeArray;
+
+      // Create a map of employee ID -> employeeName
+      this.employeeMap = employeeArray.reduce(
+        (map: { [key: string]: string }, employee: { _id: string; employeeName: string }) => {
+          map[employee._id] = employee.employeeName;
+          return map;
+        },
+        {}
+      );
+
+      console.log('Employee Map:', this.employeeMap);
+    },
+    error: (error) => console.error('Error fetching employees:', error),
+  });
+}
+
     
   // Helper method to get Employee Name from ID
   getEmployeeName(_id: string): string {
@@ -170,92 +133,36 @@ export class LaptopComponent implements OnInit {
     if (!this.searchKeyword.trim()) {
       return true; // If no search keyword, return all laptops
     }
-    
+
     const keyword = this.searchKeyword.trim().toLowerCase();
     return (
       laptop.laptopName.toLowerCase().includes(keyword) ||
       laptop.laptopSerialNumber.toLowerCase().includes(keyword) ||
       laptop.laptopDescription.toLowerCase().includes(keyword) ||
+      // Convert the Date to a string before filtering:
+      laptop.laptopPurchaseDate.toString().toLowerCase().includes(keyword) ||
       laptop.laptopLocation.toLowerCase().includes(keyword) ||
       laptop.assignedTo.toLowerCase().includes(keyword) ||
       laptop.laptopCondition.toLowerCase().includes(keyword)
     );
   }
 
-  // getLaptops(): void {
-  //   const keyword = this.searchKeyword.trim().toLowerCase();
-
-  //   if (keyword) {
-  //     // Filter the laptops based on the search keyword
-  //     this.laptops = this.laptops.filter(
-  //       (laptop) =>
-  //         laptop.name.toLowerCase().includes(keyword) ||
-  //         laptop.serialNumber.toLowerCase().includes(keyword) ||
-  //         laptop.description.toLowerCase().includes(keyword) ||
-  //         laptop.location.toLowerCase().includes(keyword) ||
-  //         laptop.assignedPersonnel.toLowerCase().includes(keyword) ||
-  //         laptop.condition.toLowerCase().includes(keyword) ||
-  //         laptop.inspectionFrequency.toLowerCase().includes(keyword) ||
-  //         laptop.inspectedBy.toLowerCase().includes(keyword)
-  //     );
-  //   } else {
-  //     // If no search keyword, reset to mock data
-  //     this.laptops = [
-  //       {
-  //         id: 1,
-  //         name: "HP Inspiron 3501 Series",
-  //         purchasedDate: "December 20, 2021",
-  //         serialNumber: "7KJ2PH3",
-  //         description: "New Laptop Dell (Mat Black)",
-  //         location: "1NK Center",
-  //         assignedPersonnel: "Sir Benjie",
-  //         condition: "Working",
-  //         inspectionFrequency: "Quarterly",
-  //         inspectedBy: "Pogi si Kim Carl Buban",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Acer Inspiron 3501 Series",
-  //         purchasedDate: "December 20, 2021",
-  //         serialNumber: "7KJ2PH3",
-  //         description: "New Laptop Dell (Mat Black)",
-  //         location: "1NK Center",
-  //         assignedPersonnel: "Sir Benjie",
-  //         condition: "Working",
-  //         inspectionFrequency: "Quarterly",
-  //         inspectedBy: "Bolbi Cedric Lunar",
-  //       },
-  //       {
-  //         id: 3,
-  //         name: "Lenovo Inspiron 3501 Series",
-  //         purchasedDate: "December 20, 2021",
-  //         serialNumber: "7KJ2PH3",
-  //         description: "New Laptop Dell (Mat Black)",
-  //         location: "1NK Center",
-  //         assignedPersonnel: "Sir Benjie",
-  //         condition: "Working",
-  //         inspectionFrequency: "Quarterly",
-  //         inspectedBy: "Bolbi Cedric Lunar",
-  //       },
-  //     ];
-  //   }
-  // }
-
   openModal(laptop?: any) {
     this.isModalOpen = true;
     if (laptop) {
-      // handle the laptop data
+      // Handle the laptop data if needed
     }
   }
+
   closeModal(): void {
     this.isModalOpen = false;
     this.getLaptops();
   }
 
   openEditModal(laptop?: any) {
-    console.log('Edit button clicked'); // Check if function is triggered
+    console.log('Edit button clicked');
     this.isEditModalOpen = true;
-    this.selectedLaptop = laptop; // Store the selected laptop
+    this.selectedLaptop = laptop;
     console.log('Selected Laptop:', this.selectedLaptop);
   }
 
@@ -264,9 +171,9 @@ export class LaptopComponent implements OnInit {
   }
 
   openDeleteModal(laptop?: any) {
-    console.log('Delete button clicked'); // Check if function is triggered
+    console.log('Delete button clicked');
     this.isDeleteModalOpen = true;
-    this.selectedLaptop = laptop; // Store the selected laptop
+    this.selectedLaptop = laptop;
     console.log('Selected Laptop:', this.selectedLaptop);
   }
 
@@ -281,6 +188,6 @@ export class LaptopComponent implements OnInit {
 
   clearSearch(): void {
     this.searchKeyword = '';
-    // this.getLaptops();
+    // Optionally, call this.getLaptops() to refresh the data without filtering.
   }
 }

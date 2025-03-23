@@ -17,6 +17,11 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../../features/features.service';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 interface Employee {
   _id: string;
@@ -28,7 +33,17 @@ interface Employee {
 
 @Component({
   selector: 'app-updates',
-  imports: [ReactiveFormsModule, CommonModule, MatIconModule, FormsModule],
+  imports: [ReactiveFormsModule,
+    CommonModule,
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
+  ],
   templateUrl: './updates.component.html',
   styleUrls: ['./updates.component.css'],
   standalone: true,
@@ -50,16 +65,16 @@ export class UpdatesComponent implements OnChanges {
     this.getEmployees();
   }
 
-  // Fetch employees from backend
   getEmployees(): void {
     this.featuresService.getAllEmployee().subscribe({
       next: (response) => {
-        this.employees = response;
+        this.employees = response.employees; // Extract only the array
         console.log('Employees fetched:', this.employees);
       },
       error: (error) => console.error('Error fetching employees:', error),
     });
   }
+  
 
   constructor(
     private fb: FormBuilder,
@@ -93,7 +108,7 @@ export class UpdatesComponent implements OnChanges {
         laptopLocation: this.selectedLaptop.laptopLocation || '',
         assignedTo: this.selectedLaptop.assignedTo || '',
         laptopCondition: this.selectedLaptop.laptopCondition || '',
-      
+
       });
     }
   }
@@ -103,14 +118,15 @@ export class UpdatesComponent implements OnChanges {
     this.closeModalEvent.emit();
   }
 
-  onAssignedChange(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
+  onAssignedChange(event: MatSelectChange) {
+    const selectedValue = event.value; // Use event.value directly
+  
     if (selectedValue === 'add') {
       this.openAddEmployeeModal();
     } else {
       this.selectedEmployeeId = selectedValue;
     }
-  }
+  }  
 
   openAddEmployeeModal() {
     this.isAddEmployeeOpen = true;
@@ -126,6 +142,13 @@ export class UpdatesComponent implements OnChanges {
       // Add new employee logic here
       console.log('New Employee:', this.newEmployee);
       this.closeAddEmployeeModal();
+    }        
+  }
+
+  onConditionChange(event: MatSelectChange) {
+    if (event && event.value) {
+      console.log('Laptop Condition changed to:', event.value);
+      this.editLaptopForm.patchValue({ laptopCondition: event.value });
     }
   }
 

@@ -7,87 +7,78 @@
 
     <form [formGroup]="editLaptopForm" (ngSubmit)="onSubmit()">
       <div class="form-grid">
-        <div class="form-group">
-          <label for="laptopName">Laptop Name</label>
-          <input
-            id="laptopName"
-            formControlName="laptopName"
-            placeholder="Enter Device Name"
-            aria-label="Laptop Name"
-          />
-        </div>
+        <mat-form-field>
+          <mat-label>Device Name</mat-label>
+          <input matInput
+          title="laptop-device"
+          id="laptopName" 
+          formControlName="laptopName" 
+          aria-label="laptop Name">
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="laptopSerialNumber">Serial Number</label>
-          <input
-            id="laptopSerialNumber"
-            formControlName="laptopSerialNumber"
-            placeholder="Enter Device Serial"
-            aria-label="Laptop Serial Number"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="laptopDescription">Description</label>
-          <input
-            id="laptopDescription"
-            formControlName="laptopDescription"
-            placeholder="Enter Description"
-            aria-label="Laptop Description"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="laptopPurchaseDate">Purchase Date</label>
-          <input
-            type="date"
-            id="laptopPurchaseDate"
-            formControlName="laptopPurchaseDate"
-            aria-label="Laptop Purchase Date"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="laptopLocation">Location</label>
-          <select
-            id="laptopLocation"
-            formControlName="laptopLocation"
-            aria-label="Laptop Location"
+        <mat-form-field>
+          <mat-label>Serial Number</mat-label>
+          <input matInput
+          title="laptop-Serial-Number"
+          id="laptopSerialNumber"
+          formControlName="laptopSerialNumber"
+          placeholder="Enter Device Serial"
           >
-            <option *ngFor="let location of locations" [value]="location">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput
+          title="laptop-description"
+          id="laptopDescription"
+          formControlName="laptopDescription"
+          placeholder="Enter Laptop Description"
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Purchase Date</mat-label>
+          <input matInput [matDatepicker]="picker"
+          title="laptop-PD"
+          id="laptopPurchaseDate"
+          formControlName="laptopPurchaseDate"
+          placeholder="MM/DD/YYYY">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker panelClass="small-datepicker"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Location</mat-label>
+          <mat-select id="laptopLocation" formControlName="laptopLocation">
+            <mat-option *ngFor="let location of locations" [value]="location">
               {{ location }}
-            </option>
-          </select>
-        </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="assignedTo">Assigned to</label>
-          <select
-            id="assignedTo"
-            formControlName="assignedTo"
-            aria-label="Assigned To"
-            (change)="onAssignedChange($event)"
-          >
-            <option *ngFor="let employee of employees" [value]="employee._id">
+        <mat-form-field>
+          <mat-label>Assigned To</mat-label>
+          <mat-select id="assignedTo" formControlName="assignedTo" (selectionChange)="onAssignedChange($event)">
+            <mat-option *ngFor="let employee of employees" [value]="employee._id">
               {{ employee.employeeName }}
-            </option>
-            <option value="add">Add New Employee</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="laptopCondition">Condition</label>
-          <select
+            </mat-option>
+            <mat-option value="add">Add New Employee</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Condition</mat-label>
+          <mat-select
             id="laptopCondition"
             formControlName="laptopCondition"
-            aria-label="Laptop Condition"
           >
-            <option>Brand New</option>
-            <option>Used</option>
-          </select>
+            <mat-option value="Brand New">Brand New</mat-option>
+            <mat-option value="Used">Used</mat-option>
+          </mat-select>
+        </mat-form-field>
+                        
         </div>
-      </div>
-
+        
       <div class="button-group">
         <button type="button" class="cancel-btn" (click)="closeModal()">
           Cancel

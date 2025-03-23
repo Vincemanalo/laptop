@@ -4,30 +4,18 @@
       <div class="dashboard-card">
         <div class="toolbar">
           <button id="open-modal" class="add-button" (click)="openModal()">
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="add_circle"
-            ></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add_circle"></mat-icon>
             <p>Add New Laptop</p>
           </button>
+
           <div class="search-container">
-            <input
-              matInput
-              type="text"
-              placeholder="Search..."
-              class="search-input"
-              [(ngModel)]="searchKeyword"
-            />
+            <input matInput type="text" placeholder="Search..." class="search-input" [(ngModel)]="searchKeyword" />
             <button class="search-btn" (click)="onSearch()">
-              <mat-icon
-                class="search-btn"
-                aria-hidden="false"
-                aria-label="Example home icon"
-                fontIcon="search"
-              ></mat-icon>
+              <mat-icon class="search-btn" aria-hidden="false" aria-label="Example home icon"
+                fontIcon="search"></mat-icon>
             </button>
           </div>
+
         </div>
         <div class="table-container">
           <table mat-table class="mat-elevation-z8" [dataSource]="laptops">
@@ -81,22 +69,18 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let laptop">
-                <button
-                  mat-button
-                  color="primary"
-                  (click)="openEditModal(laptop)"
-                >
+                <button mat-button color="primary" (click)="openEditModal(laptop)">
                   Edit
                 </button>
-                <button
-                  mat-button
-                  color="primary"
-                  (click)="openDeleteModal(laptop)"
-                >
+                <button mat-button color="primary" (click)="openDeleteModal(laptop)">
                   Delete
                 </button>
               </td>
             </ng-container>
+
+            <mat-paginator 
+            [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
@@ -106,15 +90,8 @@
     </div>
   </section>
   <app-modal *ngIf="isModalOpen" (closeModalEvent)="closeModal()"></app-modal>
-  <app-updates
-    *ngIf="isEditModalOpen"
-    [selectedLaptop]="selectedLaptop"
-    (refreshTableEvent)="getLaptops()"
-    (closeModalEvent)="closeEditModal()"
-  ></app-updates>
-  <app-delete
-    *ngIf="isDeleteModalOpen"
-    [selectedLaptop]="selectedLaptop"
-    (closeModalEvent)="closeDeleteModal()"
-  ></app-delete>
+  <app-updates *ngIf="isEditModalOpen" [selectedLaptop]="selectedLaptop" (refreshTableEvent)="getLaptops()"
+    (closeModalEvent)="closeEditModal()"></app-updates>
+  <app-delete *ngIf="isDeleteModalOpen" [selectedLaptop]="selectedLaptop" (refreshTableEvent)="getLaptops()"
+    (closeModalEvent)="closeDeleteModal()"></app-delete>
 </main>
