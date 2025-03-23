@@ -31,53 +31,47 @@
         </div>
         <div class="table-container">
           <table mat-table class="mat-elevation-z8" [dataSource]="desktops">
-            <ng-container matColumnDef="desktopName">
-              <th mat-header-cell *matHeaderCellDef>Desktop Name</th>
-              <td mat-cell *matCellDef="let desktop">{{ desktop.desktopName }}</td>
-            </ng-container>
-
+        
+            <!-- Serial Number -->
             <ng-container matColumnDef="desktopSerialNumber">
               <th mat-header-cell *matHeaderCellDef>Serial Number</th>
               <td mat-cell *matCellDef="let desktop">
                 {{ desktop.desktopSerialNumber }}
               </td>
             </ng-container>
-
-            <ng-container matColumnDef="desktopDescription">
-              <th mat-header-cell *matHeaderCellDef>Description</th>
-              <td mat-cell *matCellDef="let desktop">
-                {{ desktop.desktopDescription }}
-              </td>
-            </ng-container>
-
+        
+            <!-- Purchase Date -->
             <ng-container matColumnDef="desktopPurchaseDate">
-              <th mat-header-cell *matHeaderCellDef>Purchased Date</th>
+              <th mat-header-cell *matHeaderCellDef>Purchase Date</th>
               <td mat-cell *matCellDef="let desktop">
-                {{ desktop.desktopPurchaseDate }}
+                {{ desktop.desktopPurchaseDate | date:'MM/dd/yyyy' }}
               </td>
             </ng-container>
-
+        
+            <!-- Location -->
             <ng-container matColumnDef="desktopLocation">
               <th mat-header-cell *matHeaderCellDef>Location</th>
               <td mat-cell *matCellDef="let desktop">
                 {{ desktop.desktopLocation }}
               </td>
             </ng-container>
-
+        
+            <!-- Assigned Personnel -->
             <ng-container matColumnDef="assignedTo">
-              <th mat-header-cell *matHeaderCellDef>Assigned To</th>
+              <th mat-header-cell *matHeaderCellDef>Assigned Personnel</th>
               <td mat-cell *matCellDef="let desktop">
                 {{ desktop.assignedTo }}
               </td>
             </ng-container>
-
+        
+            <!-- Condition -->
             <ng-container matColumnDef="desktopCondition">
               <th mat-header-cell *matHeaderCellDef>Condition</th>
               <td mat-cell *matCellDef="let desktop">
                 {{ desktop.desktopCondition }}
               </td>
             </ng-container>
-
+                
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let desktop">

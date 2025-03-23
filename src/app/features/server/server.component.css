@@ -1,0 +1,377 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  main {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* .search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+  } */
+  
+  .search-container {
+    display: flex;
+    height: 40px;
+    justify-content: flex-end;
+    border: 1px solid gray;
+    border-radius: 10px;
+    align-items: center;
+    padding: 0 5px; /* Optional: Adds padding inside the container */
+  }
+  
+  .search-input {
+    width: 300px;
+    margin-left: 10px;
+    border: none;
+    outline: none; /* Removes blue outline when clicked */
+  }
+  
+  .search-btn {
+    color: gray;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.6rem;
+    display: flex; /* Add this */
+    align-items: center; /* Center icon vertically */
+    height: 100%; /* Match container height */
+    margin-left: 5px;
+    padding: 0; /* Remove default button padding */
+  }
+  
+  .dashboard-card {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 5rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-top: 20px;
+    color: var(--font-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  th {
+    background-color: var(--color3);
+    color: var(--header-color);
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+    letter-spacing: 0.5px;
+  }
+  
+  th,
+  td {
+    text-align: center;
+    border-top: 1px solid rgb(145, 145, 145);
+    border-left: 1px solid rgb(145, 145, 145);
+    padding: 10px;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ececec;
+  }
+  
+  tr:hover {
+    background-color: var(--hover-row, rgba(252, 68, 68, 0.1));
+    transition: background 0.3s ease-in-out;
+  }
+  
+  td:first-child,
+  th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  
+  td:last-child,
+  th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  @media (max-width: 414px) {
+    table {
+      font-size: 0.9rem;
+    }
+  
+    th,
+    td {
+      padding: 12px;
+    }
+  
+    .table-container {
+      overflow-x: auto;
+    }
+  
+    .search-container {
+      max-width: 150px;
+    }
+  
+    .search-input {
+      max-width: 100px;
+    }
+  
+    .add-button {
+      width: auto;
+    }
+  
+    .add-button p {
+      font-size: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    table {
+      font-size: 0.9rem;
+    }
+  
+    th,
+    td {
+      padding: 12px;
+    }
+  
+    .table-container {
+      overflow-x: auto;
+    }
+  
+    .search-container {
+      max-width: 150px;
+    }
+  
+    .search-input {
+      max-width: 100px;
+    }
+  
+    .add-button {
+      width: auto;
+    }
+  }
+  
+  @media (max-width: 2000px) {
+    table {
+      font-size: 0.9rem;
+    }
+  
+    th,
+    td {
+      padding: 12px;
+    }
+  
+    .table-container {
+      overflow-x: auto;
+    }
+    .search-container {
+      max-width: 300px;
+    }
+  
+    .search-input {
+      max-width: 200px;
+    }
+  
+    .add-button {
+      width: auto;
+    }
+  }
+  
+  .edit-btn {
+    background: #3674b5;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px;
+    display: inline-block;
+    margin: 2px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .edit-btn:hover {
+    background: #06f26d;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .add-button {
+    background: #3674b5;
+    color: black;
+    border: solid 1px;
+    padding: 14px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .add-button p {
+    margin-left: 10px;
+  }
+  
+  .modal button {
+    background: var(--color2);
+    color: black;
+    border: solid 1px;
+    padding: 14px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+    display: block;
+    margin: 20px auto 20px 0;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    background: #3674b5;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 10px;
+    flex-direction: column;
+    margin: 5px auto 5px 0;
+  }
+  
+  /* modalll*/
+  .popup-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
+  
+  /* modal grid */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+    grid-column: span 2;
+    background-color: white;
+    padding: 20px;
+  }
+  
+  /* Full-width elements */
+  .full-width {
+    grid-column: span 2;
+  }
+  
+  /* Close modal */
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s;
+  }
+  /* Form groups */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Labels */
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  /* Inputs and Selects */
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .button-container button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button-container .cancel {
+    background: #e74c3c;
+    color: #fff;
+  }
+  
+  .button-container .cancel:hover {
+    background: #c0392b;
+  }
+  
+  .button-container .Add,
+  .save {
+    background: #3498db;
+    color: #fff;
+  }
+  
+  ::ng-deep .cdk-overlay-pane {
+    background-color: #fff !important; /* Solid white background */
+  }
+  
+  .mat-select-trigger {
+    background-color: #fff !important; /* Solid white background for the trigger */
+  }
+  

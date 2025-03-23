@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 interface Employee {
   _id: string;
   employeeName: string;
+  employeeEmail: string;
   employmentDate: Date;
   employmentPeriod: string;
   status: string;
@@ -44,9 +45,10 @@ interface Employee {
 })
 export class AddempComponent {
   @Output() closeModalEvent = new EventEmitter<void>();
-  employees: Employee[] = [];
-  selectedEmployeeId: string = '';
 
+  employees: Employee[] = [];
+
+  selectedEmployeeId: string = '';
   editEmployeeForm: FormGroup;
   isModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false;
@@ -55,6 +57,7 @@ export class AddempComponent {
   ngOnInit(): void {
     this.getEmployees();
   }
+  
 
   getEmployees(): void {
     this.featuresService.getAllEmployee().subscribe({
@@ -74,7 +77,7 @@ export class AddempComponent {
     this.editEmployeeForm = this.fb.group({
       employeeName: ['', Validators.required],
       employmentDate: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      employeeEmail: ['', [Validators.required, Validators.email]],
       contact: ['', Validators.required],
       position: ['', Validators.required],
       address: ['', Validators.required],
@@ -95,6 +98,10 @@ export class AddempComponent {
 
   openAddEmployeeModal() {
     this.isAddEmployeeOpen = true;
+
+    setTimeout(() => {
+      this.getEmployees();
+    }, 100);
   }
 
   closeAddEmployeeModal() {
@@ -104,16 +111,16 @@ export class AddempComponent {
 
   onSubmit() {
     if (this.editEmployeeForm.valid) {
-      const laptopData = this.editEmployeeForm.value;
-      console.log('Submitting:', laptopData);
+      const employeesdata = this.editEmployeeForm.value;
+      console.log('Submitting:', employeesdata);
 
-      this.featuresService.addLaptop(laptopData).subscribe({
+      this.featuresService.addLaptop(employeesdata).subscribe({
         next: (response) => {
-          console.log('Laptop added successfully:', response);
+          console.log('Employee added successfully:', response);
           this.closeModal();
         },
         error: (error) => {
-          console.error('Error adding laptop:', error);
+          console.error('Error adding Employee:', error);
         },
       });
     }

@@ -41,8 +41,12 @@ interface Employee {
 export class UserManagementComponent implements OnInit {
   displayedColumns: string[] = [
     'employeeName',
+    'employeeEmail',
     'employmentDate',
-    'employmentPeriod',
+    'employeeContact',
+    'employeePosition',
+    'employeeAddress',
+    'TeamColor',
     'actions'
   ];
 

@@ -43,9 +43,7 @@ interface Desktop {
 })
 export class DesktopComponent implements OnInit {
   displayedColumns: string[] = [
-    'desktopName',
     'desktopSerialNumber',
-    'desktopDescription',
     'desktopPurchaseDate',
     'desktopLocation',
     'assignedTo',
@@ -54,33 +52,7 @@ export class DesktopComponent implements OnInit {
   ];
 
   desktops: Desktop[] = [
-    // {
-    //   desktopName: 'Dell OptiPlex 7070',
-    //   desktopSerialNumber: 'D3LL12345',
-    //   desktopDescription: 'High-performance office desktop',
-    //   desktopPurchaseDate: new Date('2022-03-15'),
-    //   desktopLocation: 'Main Office',
-    //   assignedTo: 'John Doe',
-    //   desktopCondition: 'Working',
-    // },
-    // {
-    //   desktopName: 'HP EliteDesk 800',
-    //   desktopSerialNumber: 'HP98765',
-    //   desktopDescription: 'Compact business desktop',
-    //   desktopPurchaseDate: new Date('2021-11-10'),
-    //   desktopLocation: 'IT Department',
-    //   assignedTo: 'Jane Smith',
-    //   desktopCondition: 'Needs Maintenance',
-    // },
-    // {
-    //   desktopName: 'Lenovo ThinkCentre M720',
-    //   desktopSerialNumber: 'LNV54321',
-    //   desktopDescription: 'Reliable desktop for multitasking',
-    //   desktopPurchaseDate: new Date('2023-01-20'),
-    //   desktopLocation: 'Finance Office',
-    //   assignedTo: 'Michael Brown',
-    //   desktopCondition: 'Working',
-    // },
+
   ];
 
   isModalOpen = false;

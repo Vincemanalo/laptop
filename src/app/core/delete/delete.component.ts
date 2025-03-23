@@ -30,7 +30,7 @@ interface Employee {
   selector: 'app-delete',
   imports: [ReactiveFormsModule, CommonModule, MatIconModule, FormsModule],
   templateUrl: './delete.component.html',
-  styleUrl: './delete.component.css',
+  styleUrls: ['./delete.component.css'],
   standalone: true,
 })
 export class DeleteComponent implements OnChanges {

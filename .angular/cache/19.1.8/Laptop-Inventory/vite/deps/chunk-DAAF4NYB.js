@@ -1,6 +1,6 @@
 import {
   MatCommonModule
-} from "./chunk-KGX2SZTL.js";
+} from "./chunk-ZEJCDJLL.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -721,4 +721,4 @@ export {
   MatNativeDateModule,
   provideNativeDateAdapter
 };
-//# sourceMappingURL=chunk-EOBR4VC4.js.map
+//# sourceMappingURL=chunk-DAAF4NYB.js.map

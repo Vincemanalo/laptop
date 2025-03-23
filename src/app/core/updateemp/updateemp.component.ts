@@ -17,7 +17,6 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../../features/features.service';
-import { DeleteEmpComponent } from '../deleteemp/deleteemp.component';
 
 interface Employee {
   _id: string;
@@ -34,7 +33,6 @@ interface Employee {
     CommonModule,
     MatIconModule,
     FormsModule,
-    DeleteEmpComponent,
   ],
   templateUrl: './updateemp.component.html',
   styleUrls: ['./updateemp.component.css'],

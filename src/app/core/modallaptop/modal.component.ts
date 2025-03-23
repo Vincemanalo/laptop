@@ -37,9 +37,9 @@ interface Employee {
 })
 export class ModalComponent {
   @Output() closeModalEvent = new EventEmitter<void>();
+
   employees: Employee[] = []; // Store employees data
   selectedEmployeeId: string = ""; // Store selected employee ID
-
   editLaptopForm: FormGroup;
   isModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false; // For Add Employee modal
@@ -67,18 +67,6 @@ export class ModalComponent {
       error: (error) => console.error("Error fetching employees:", error),
     });
   }  
-
-  // employees: string[] = [
-  //   "67c5515be20a687c69e00b6c",
-  //   " Kim Carl Buban",
-  //   "Jhomark Alber",
-  //   "Justmyr Rodriguez",
-  //   "Raymart Castillo",
-  //   "John Kenneth Fajiculay",
-  //   "Cheli Ann",
-  //   "Beverly Dadis"
-
-  // ];
 
   constructor(
     private fb: FormBuilder,
