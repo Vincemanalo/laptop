@@ -10,18 +10,20 @@ import { catchError, map, Observable, retry, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class FeaturesService {
-  private baseUrl = 'http://10.0.0.25:3000';
+  private baseUrl = 'http://10.0.0.17:3000';
 
   // private baseUrl = "https://67ce827a125cd5af757abfbb.mockapi.io/device/laptop";
 
   constructor(private http: HttpClient) {}
+
+
+  // LAPTOP 
 
   addLaptop(laptop: any): Observable<any> {
     const token = sessionStorage.getItem('auth_token');
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `${token}`,
       }),
     };
 
@@ -45,20 +47,24 @@ export class FeaturesService {
       catchError(this.handleError)
     );
   }
+
+  // LAPTOP
   
-  addEmployee(laptop: any): Observable<any> {
+
+  // EMPLOYEE
+  addEmployee(employee: any): Observable<any> {
     const token = sessionStorage.getItem('auth_token');
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `${token}`,
+        // Authorization: `${token}`,
       }),
     };
 
     return this.http
-      .post<any>(`${this.baseUrl}/user/employee`, this.addEmployee, options)
-      .pipe(retry(3), catchError(this.handleError));
-  }
+    .post<any>(`${this.baseUrl}/user/employee`, employee, options)
+    .pipe(retry(3), catchError(this.handleError));
+    }
 
 
   getAllEmployee(): Observable<any> {
@@ -77,6 +83,8 @@ export class FeaturesService {
       catchError(this.handleError)
     );
   }
+
+  // Employee
   
 
   getLaptopById(id: number): Observable<any> {

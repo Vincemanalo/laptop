@@ -17,6 +17,11 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../../features/features.service';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 interface Employee {
   _id: string;
@@ -33,6 +38,11 @@ interface Employee {
     CommonModule,
     MatIconModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   templateUrl: './updateemp.component.html',
   styleUrls: ['./updateemp.component.css'],
@@ -42,9 +52,9 @@ export class UpdatesEmpComponent implements OnChanges {
   @Input() selectedEmployee: any = {}; // Receive data from parent component
   @Output() closeModalEvent = new EventEmitter<void>();
   @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to parent
-  employees: Employee[] = []; // Store employees data
+  employees: Employee[] = []; // Store employees
+  //  data
   selectedEmployeeId: string = ''; // Store selected employee ID
-
   editEmployeeForm!: FormGroup;
   isEditModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false; // For Add Employee modal
@@ -74,10 +84,6 @@ export class UpdatesEmpComponent implements OnChanges {
     this.editEmployeeForm = this.fb.group({
       employeeName: ['', Validators.required],
       employmentDate: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      contact: ['', Validators.required],
-      position: ['', Validators.required],
-      address: ['', Validators.required],
     });
   }
 
@@ -92,11 +98,7 @@ export class UpdatesEmpComponent implements OnChanges {
       this.editEmployeeForm.patchValue({
         employeeName: this.selectedEmployee.employeeName || '',
         employmentDate: this.selectedEmployee.employmentDate || '',
-        email: this.selectedEmployee.email || '',
-        contact: this.selectedEmployee.contact || '',
-        position: this.selectedEmployee.position || '',
-        address: this.selectedEmployee.address || '',
-      });
+        });
     }
   }
 

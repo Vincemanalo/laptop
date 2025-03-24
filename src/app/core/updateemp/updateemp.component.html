@@ -3,98 +3,32 @@
     <span class="close-btn" (click)="closeModal()">×</span>
     <h2>
       {{
-        selectedEmployee.EmployeeName ? "Edit Employee Details" : " Employee Details"
+      selectedEmployee.EmployeeName ? "Edit Employee Details" : "Employee Details"
       }}
     </h2>
 
     <form [formGroup]="editEmployeeForm" (ngSubmit)="onSubmit()">
       <div class="form-grid">
-        <div class="form-group">
-          <label for="EmployeeName">Employee Name</label>
-          <input
-            id="EmployeeName"
-            formControlName="EmployeeName"
-            placeholder="Enter Name"
-            aria-label="employee Name"
-          />
-        </div>
 
-        <div class="form-group">
-          <label for="EmploymentDate">Employment Date</label>
-          <input
-            type="date"
-            id="EmploymentDate"
-            formControlName="employmentDate"
-            aria-label="Employment Date"
-          />
-        </div>
-        <div class="form-group">
-          <label for="E">Email</label>
-          <input
-            id="EmployeeEmail"
-            formControlName="email"
-            placeholder="Enter Email"
-            aria-label="employee Email"
-          />
-        </div>
+        <mat-form-field>
+          <mat-label>Employee Name</mat-label>
+          <input matInput id="employeeName" formControlName="employeeName" placeholder="Enter Employee Name" />
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="contact">Contact</label>
-          <input
-            id="contact"
-            formControlName="contact"
-            placeholder="Enter Contact"
-            aria-label="employee Contact"
-          />
-        </div>
-        <div class="form-group">
-          <label for="position">Position</label>
-          <select
-            id="position"
-            formControlName="position"
-            aria-label="employee Position"
-          >
-            <option>Manager</option>
-            <option>Developer</option>
-            <option>Designer</option>
-            <option>Tester</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="address">Address</label>
-          <select
-            id="address"
-            formControlName="address"
-            aria-label="employee Address"
-          >
-            <option *ngFor="let employee of employees" [value]="employee._id">
-              {{ employee.employeeName }}
-            </option>
-            <option value="add">Add New Employee</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="position">position</label>
-          <select
-            id="position"
-            formControlName="position"
-            aria-label="employee Position"
-          >
-            <option>Green Team</option>
-            <option>Blue Team</option>
-          </select>
-        </div>
+        <mat-form-field>
+          <mat-label>Employment Date</mat-label>
+          <input matInput [matDatepicker]="picker" title="PD" id="employmentDate" formControlName="employmentDate"
+            placeholder="MM/DD/YYYY" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker panelClass="small-datepicker"></mat-datepicker>
+        </mat-form-field>
       </div>
 
       <div class="button-group">
         <button type="button" class="cancel-btn" (click)="closeModal()">
           Cancel
         </button>
-        <button type="submit" [disabled]="editEmployeeForm.invalid">
-          Save
-        </button>
+        <button type="submit" [disabled]="editEmployeeForm.invalid">Add</button>
       </div>
     </form>
   </div>

@@ -3,7 +3,7 @@ import { ModalComponent } from '../../core/modallaptop/modal.component';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../features.service';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -41,14 +41,12 @@ interface Employee {
 export class UserManagementComponent implements OnInit {
   displayedColumns: string[] = [
     'employeeName',
-    'employeeEmail',
     'employmentDate',
-    'employeeContact',
-    'employeePosition',
-    'employeeAddress',
-    'TeamColor',
+    'employmentPeriod',
     'actions'
   ];
+
+  dataSource = new MatTableDataSource<any>();
 
   employees: any[] = [];
   isModalOpen = false;
@@ -74,31 +72,25 @@ export class UserManagementComponent implements OnInit {
     this.FeaturesService.getAllEmployee().subscribe({
       next: (response) => {
         console.log('Employees response:', response);
-
-        // Ensure response is an array or extract the correct data
-        const employeesArray = Array.isArray(response) ? response : response.employees || [];
-
-        if (!Array.isArray(employeesArray)) {
+  
+        // Check if response contains an array of employees
+        if (!response.employees || !Array.isArray(response.employees)) {
           console.error('Unexpected response format:', response);
           return;
         }
-
-        this.employee = employeesArray;
-        console.log(this.employee, "sd");
-        
-        // this.employeeMap = employeesArray.reduce(
-        //   (map: { [key: string]: string }, employee: { _id: string; employeeName: string }) => {
-        //     map[employee._id] = employee.employeeName;
-        //     return map;
-        //   },
-        //   {}
-        // );
-
-        // console.log('Employee Map:', this.employeeMap);
+  
+        // Assign data to the table's dataSource
+        this.dataSource.data = response.employees;
+  
+        // If using MatTableDataSource, refresh table manually
+        this.dataSource._updateChangeSubscription(); 
+  
+        console.log('Updated dataSource:', this.dataSource.data);
       },
       error: (error) => console.error('Error fetching employees:', error),
     });
   }
+  
 
   getEmployeeName(_id: string): string {
     return this.employeeMap[_id] || 'Unknown';

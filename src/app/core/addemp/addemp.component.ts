@@ -77,10 +77,6 @@ export class AddempComponent {
     this.editEmployeeForm = this.fb.group({
       employeeName: ['', Validators.required],
       employmentDate: ['', Validators.required],
-      employeeEmail: ['', [Validators.required, Validators.email]],
-      contact: ['', Validators.required],
-      position: ['', Validators.required],
-      address: ['', Validators.required],
     });
   }
 
@@ -114,7 +110,7 @@ export class AddempComponent {
       const employeesdata = this.editEmployeeForm.value;
       console.log('Submitting:', employeesdata);
 
-      this.featuresService.addLaptop(employeesdata).subscribe({
+      this.featuresService.addEmployee(employeesdata).subscribe({
         next: (response) => {
           console.log('Employee added successfully:', response);
           this.closeModal();

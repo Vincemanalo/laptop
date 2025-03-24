@@ -56,7 +56,7 @@
 
         <mat-form-field>
           <mat-label>Assigned Personnel</mat-label>
-          <mat-select id="assignedTo" formControlName="assignedTo">
+          <mat-select id="laptopAssignedTo" formControlName="laptopAssignedTo">
             <mat-option *ngFor="let employee of employees" [value]="employee._id">
               {{ employee.employeeName }}
             </mat-option>

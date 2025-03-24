@@ -206,14 +206,46 @@ th:last-child {
   }
 }
 
+/* Styling the action buttons */
+.actionbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px; /* Adjust padding if needed */
+  border-radius: 5px;
+  overflow: hidden; /* Ensures nothing overflows */
+}
+
+/* Make the icons bigger and properly centered */
+.actionbtn mat-icon {
+  font-size: 25px !important; /* Adjust icon size */
+  width: 20px; /* Set width to prevent cut-off */
+  height: 25px; /* Set height to prevent cut-off */
+  line-height: 24px; /* Match icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adjust spacing between buttons */
+.actionbtn + .actionbtn {
+  margin-left: 2px;
+}
+
+/* Add hover effect */
+.actionbtn:hover {
+  background-color: rgba(0, 92, 187, 0.1);
+  transition: background 0.3s ease-in-out;
+}
+
 .edit-btn {
   background: #3674b5;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 5px 5px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 20px;
   display: inline-block;
   margin: 2px;
   transition: background 0.3s ease-in-out;
@@ -221,12 +253,6 @@ th:last-child {
 
 .edit-btn:hover {
   background: #06f26d;
-}
-
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
 }
 
 .add-button {
@@ -264,7 +290,7 @@ th:last-child {
   background: #3674b5;
   color: white;
   border: none;
-  padding: 10px 10px;
+  padding: 5px 5px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 10px;

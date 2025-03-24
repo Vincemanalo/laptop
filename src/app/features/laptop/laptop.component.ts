@@ -18,7 +18,7 @@ interface Laptop {
   laptopDescription: string;
   laptopPurchaseDate: Date;
   laptopLocation: string;
-  assignedTo: string;
+  laptopAssignedTo: string;
   laptopCondition: string;
 }
 
@@ -36,6 +36,8 @@ interface Laptop {
     MatDialogModule,
     FormsModule,
     MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule
   ],
   templateUrl: './laptop.component.html',
   styleUrls: ['./laptop.component.css'],  // Corrected to "styleUrls" (plural)
@@ -48,7 +50,7 @@ export class LaptopComponent implements OnInit {
     'laptopDescription',
     'laptopPurchaseDate',
     'laptopLocation',
-    'assignedTo',
+    'laptopAssignedTo',
     'laptopCondition',
     'actions',
   ];
@@ -142,7 +144,7 @@ getEmployees(): void {
       // Convert the Date to a string before filtering:
       laptop.laptopPurchaseDate.toString().toLowerCase().includes(keyword) ||
       laptop.laptopLocation.toLowerCase().includes(keyword) ||
-      laptop.assignedTo.toLowerCase().includes(keyword) ||
+      laptop.laptopAssignedTo.toLowerCase().includes(keyword) ||
       laptop.laptopCondition.toLowerCase().includes(keyword)
     );
   }

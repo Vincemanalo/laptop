@@ -19,7 +19,7 @@ interface Desktop {
   desktopDescription: string;
   desktopPurchaseDate: Date;
   desktopLocation: string;
-  assignedTo: string;
+  desktopassignedTo: string;
   desktopCondition: string;
 }
 
@@ -46,7 +46,7 @@ export class DesktopComponent implements OnInit {
     'desktopSerialNumber',
     'desktopPurchaseDate',
     'desktopLocation',
-    'assignedTo',
+    'desktopassignedTo',
     'desktopCondition',
     'actions',
   ];
@@ -101,7 +101,7 @@ this.desktops = this.desktops.filter(
           desktop.desktopSerialNumber.toLowerCase().includes(keyword) ||
           desktop.desktopDescription.toLowerCase().includes(keyword) ||
           desktop.desktopLocation.toLowerCase().includes(keyword) ||
-          desktop.assignedTo.toLowerCase().includes(keyword) ||
+          desktop.desktopassignedTo.toLowerCase().includes(keyword) ||
           desktop.desktopCondition.toLowerCase().includes(keyword)
       );
     }

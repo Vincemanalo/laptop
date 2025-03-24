@@ -51,10 +51,10 @@ interface Employee {
 export class UpdatesComponent implements OnChanges {
   @Input() selectedLaptop: any = {}; // Receive data from parent component
   @Output() closeModalEvent = new EventEmitter<void>();
-  @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to p
+  @Output() refreshTableEvent = new EventEmitter<void>(); //
+  //  Emit event to p
   employees: Employee[] = []; // Store employees data
   selectedEmployeeId: string = ''; // Store selected employee ID
-
   editLaptopForm: FormGroup;
   isEditModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false; // For Add Employee modal
@@ -87,7 +87,7 @@ export class UpdatesComponent implements OnChanges {
       laptopDescription: ['', [Validators.maxLength(50)]],
       laptopPurchaseDate: ['', Validators.required],
       laptopLocation: ['', Validators.required],
-      assignedTo: [''],
+      laptopAssignedTo: [''],
       laptopCondition: ['', Validators.required],
     });
   }
@@ -106,7 +106,7 @@ export class UpdatesComponent implements OnChanges {
         laptopDescription: this.selectedLaptop.laptopDescription || '',
         laptopPurchaseDate: this.selectedLaptop.laptopPurchaseDate || '',
         laptopLocation: this.selectedLaptop.laptopLocation || '',
-        assignedTo: this.selectedLaptop.assignedTo || '',
+        laptopAssignedTo: this.selectedLaptop.laptopAssignedTo || '',
         laptopCondition: this.selectedLaptop.laptopCondition || '',
 
       });

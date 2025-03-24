@@ -79,7 +79,7 @@ export class ModalComponent {
       laptopDescription: ["", [Validators.maxLength(50)]],
       laptopPurchaseDate: ["", Validators.required],
       laptopLocation: ["", Validators.required],
-      assignedTo: [null, Validators.required],
+      laptopAssignedTo: [null, Validators.required],
       laptopCondition: ["", Validators.required],
     });
   }

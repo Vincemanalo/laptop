@@ -57,12 +57,11 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Assigned To</mat-label>
-          <mat-select id="assignedTo" formControlName="assignedTo" (selectionChange)="onAssignedChange($event)">
+          <mat-label>laptopAssignedTo To</mat-label>
+          <mat-select id="laptopAssignedTo" formControlName="laptopAssignedTo" (selectionChange)="onAssignedChange($event)">
             <mat-option *ngFor="let employee of employees" [value]="employee._id">
               {{ employee.employeeName }}
             </mat-option>
-            <mat-option value="add">Add New Employee</mat-option>
           </mat-select>
         </mat-form-field>
         
