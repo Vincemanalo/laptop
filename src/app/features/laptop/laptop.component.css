@@ -67,6 +67,7 @@ main {
   padding: 20px;
   margin-top: 5rem;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -206,53 +207,34 @@ th:last-child {
   }
 }
 
-/* Styling the action buttons */
+/* Styling the action buttons container (applied directly to the button element) */
 .actionbtn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 5px; /* Adjust padding if needed */
-  border-radius: 5px;
-  overflow: hidden; /* Ensures nothing overflows */
+  overflow: hidden;
+  width: 100%;
 }
 
-/* Make the icons bigger and properly centered */
+/* Make the icons larger and remain centered */
 .actionbtn mat-icon {
-  font-size: 25px !important; /* Adjust icon size */
-  width: 20px; /* Set width to prevent cut-off */
-  height: 25px; /* Set height to prevent cut-off */
-  line-height: 24px; /* Match icon size */
+  font-size: 25px !important;  /* Icon remains big */
+  width: 25px;                 /* Adjusted width to match font size */
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Adjust spacing between buttons */
+/* Adjust spacing between adjacent action buttons */
 .actionbtn + .actionbtn {
-  margin-left: 2px;
+  margin-left: 4px;  /* Slight gap between buttons */
 }
 
-/* Add hover effect */
+/* Hover effect on the button */
 .actionbtn:hover {
   background-color: rgba(0, 92, 187, 0.1);
   transition: background 0.3s ease-in-out;
-}
-
-.edit-btn {
-  background: #3674b5;
-  color: white;
-  border: none;
-  padding: 5px 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 20px;
-  display: inline-block;
-  margin: 2px;
-  transition: background 0.3s ease-in-out;
-}
-
-.edit-btn:hover {
-  background: #06f26d;
 }
 
 .add-button {
@@ -285,18 +267,6 @@ th:last-child {
   margin: 20px auto 20px 0;
 }
 
-.edit-btn,
-.delete-btn {
-  background: #3674b5;
-  color: white;
-  border: none;
-  padding: 5px 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 10px;
-  flex-direction: column;
-  margin: 5px auto 5px 0;
-}
 
 /* modalll*/
 .popup-form {

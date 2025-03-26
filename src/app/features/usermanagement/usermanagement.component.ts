@@ -33,6 +33,7 @@ interface Employee {
     FormsModule,
     AddempComponent,
     MatPaginatorModule,
+    MatIconModule
   ],
   templateUrl: './usermanagement.component.html',
   styleUrl: './usermanagement.component.css',

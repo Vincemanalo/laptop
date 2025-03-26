@@ -6,11 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { UpdatesComponent } from '../../core/updates/updates.component';
 import { DeleteComponent } from '../../core/delete/delete.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ModalinfoComponent } from '../../core/modalinfo/modalinfo.component';
+import { DialogModule } from '@angular/cdk/dialog';
 
 interface Laptop {
   laptopName: string;
@@ -36,11 +38,12 @@ interface Laptop {
     MatDialogModule,
     FormsModule,
     MatPaginatorModule,
-    MatIconModule,
-    MatButtonModule
+    ModalinfoComponent,
+    DialogModule,
+    MatDialog
   ],
   templateUrl: './laptop.component.html',
-  styleUrls: ['./laptop.component.css'],  // Corrected to "styleUrls" (plural)
+  styleUrls: ['./laptop.component.css'],
   standalone: true,
 })
 export class LaptopComponent implements OnInit {
@@ -141,7 +144,6 @@ getEmployees(): void {
       laptop.laptopName.toLowerCase().includes(keyword) ||
       laptop.laptopSerialNumber.toLowerCase().includes(keyword) ||
       laptop.laptopDescription.toLowerCase().includes(keyword) ||
-      // Convert the Date to a string before filtering:
       laptop.laptopPurchaseDate.toString().toLowerCase().includes(keyword) ||
       laptop.laptopLocation.toLowerCase().includes(keyword) ||
       laptop.laptopAssignedTo.toLowerCase().includes(keyword) ||
@@ -181,6 +183,16 @@ getEmployees(): void {
 
   closeDeleteModal(): void {
     this.isDeleteModalOpen = false;
+  }
+
+  openModalInfo(laptop: any): void {
+    this.dialog.open(ModalinfoComponent, {
+      data: laptop,
+      width: '90vw',  // 90% of the viewport width
+      height: '90vh', // 90% of the viewport height
+      maxWidth: 'none', // Ensures it doesn't shrink due to Material's default max width
+      panelClass: 'full-screen-modal' // Optional: custom styles
+    });
   }
 
   onSearch(): void {
