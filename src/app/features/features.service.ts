@@ -137,7 +137,7 @@
       };
       // emoployeeData
       return this.http
-        .put<any>(`${this.baseUrl}/device/laptop/${id}`, employeeData, options)
+        .put<any>(`${this.baseUrl}/user/employee/${id}`, employeeData, options)
         .pipe(retry(3), catchError(this.handleError));
     }
 
@@ -194,13 +194,13 @@
 
     disableEmployee(id: number): Observable<any> {
       const token = sessionStorage.getItem('auth_token');
-      const url = `${this.baseUrl}/employee${id}`;
+      const url = `${this.baseUrl}/user/employee/${id}`;
       console.log('DELETE Request URL:', url); // Debugging URL
 
       const options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         }),
       };
     
@@ -212,14 +212,18 @@
 
     private handleError(error: HttpErrorResponse) {
       if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred.
         console.error('An error occurred:', error.error.message);
+        return throwError(() => new Error(error.error.message));
       } else {
+        // The backend returned an unsuccessful response code.
         console.error(
-          `Backend returned code ${error.status}, body was: ${error.error}`
+          `Backend returned code ${error.status}, body was: ${JSON.stringify(error.error)}`
         );
+        // Use the error message from the backend if available.
+        const errorMessage = error.error?.message || 'Something bad happened; please try again later.';
+        return throwError(() => new Error(errorMessage));
       }
-      return throwError(
-        () => new Error('Something bad happened; please try again later.')
-      );
     }
+    
   }

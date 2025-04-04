@@ -123,7 +123,7 @@ export class ModalComponent {
     if (this.editLaptopForm.valid) {
       const laptopData = this.editLaptopForm.value;
       console.log("Submitting:", laptopData);
-
+  
       this.featuresService.addLaptop(laptopData).subscribe({
         next: (response) => {
           console.log("Laptop added successfully:", response);
@@ -131,8 +131,10 @@ export class ModalComponent {
         },
         error: (error) => {
           console.error("Error adding laptop:", error);
+          // Show alert with message from backend
+          alert(error.message || 'An unexpected error occurred.');
         },
       });
     }
-  }
+  }  
 }

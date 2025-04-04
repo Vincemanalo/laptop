@@ -41,9 +41,9 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let employee" class="actionbtn">
-                <button class="actionbtn" mat-button color="primary" (click)="openModalInfoEmp(employee)">
+                <!-- <button class="actionbtn" mat-button color="primary" (click)="openModalInfoEmp(employee)">
                   <mat-icon class="custom-info-icon">info</mat-icon>
-                </button>
+                </button> -->
                 <button class="actionbtn" mat-button color="primary" (click)="openeditempModal(employee)">
                   <mat-icon class="material-symbols-outlined">edit</mat-icon>
                 </button>
@@ -64,7 +64,7 @@
   <!-- Modals -->
   <app-addemp *ngIf="isModalOpen" (employeeAdded)="closeaddemp()" (closeModalEvent)="closeModal()"></app-addemp>
   
-  <app-modalinfoemp *ngIf="isModalInfoEmpOpen" (closeModalEvent)="isModalInfoEmpOpen = false"></app-modalinfoemp>
+  <app-modalinfo *ngIf="isModalInfoEmpOpen" (closeModalEvent)="isModalInfoEmpOpen = false"></app-modalinfo>
 
   <app-updatesemp
     *ngIf="iseditempModalOpen && selectedemployee"
@@ -73,5 +73,11 @@
     (refreshTableEvent)="getEmployees()">
   </app-updatesemp>
 
-  <app-deleteemp *ngIf="isDeleteModalOpen" (closeModalEvent)="isDeleteModalOpen = false"></app-deleteemp>
+  <app-deleteemp 
+    *ngIf="isDeleteModalOpen"
+    [selectedEmployee]="selectedemployee"  
+    (closeModalEvent)="isDeleteModalOpen = false"
+    (refreshTableEvent)="getEmployees()" >
+  </app-deleteemp>
+
 </main>

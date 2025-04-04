@@ -117,8 +117,11 @@ export class AddempComponent {
         },
         error: (error: any) => {
           console.error('Error adding Employee:', error);
+          // If the call fails, display an alert with the error message.
+          alert(error?.message || 'Failed to add Employee');
         },
       });
     }
   }
+  
 }

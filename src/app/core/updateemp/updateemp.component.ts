@@ -130,7 +130,7 @@ export class UpdatesEmpComponent implements OnChanges {
     if (this.editEmployeeForm.valid) {
       const employeeData = this.editEmployeeForm.value;
       console.log('Submitting:', employeeData);
-
+  
       this.featuresService
         .updateEmployee(this.selectedEmployee._id, employeeData)
         .subscribe({
@@ -142,6 +142,8 @@ export class UpdatesEmpComponent implements OnChanges {
           },
           error: (error) => {
             console.error('Error editing employee:', error);
+            // Show alert with backend message if available
+            alert(error.message || 'An error occurred while editing the employee.');
           },
         });
     }

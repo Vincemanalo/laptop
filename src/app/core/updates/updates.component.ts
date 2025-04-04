@@ -156,7 +156,7 @@ export class UpdatesComponent implements OnChanges {
     if (this.editLaptopForm.valid) {
       const laptopData = this.editLaptopForm.value;
       console.log('Submitting:', laptopData);
-
+  
       this.featuresService
         .updateLaptop(this.selectedLaptop._id, laptopData)
         .subscribe({
@@ -168,6 +168,8 @@ export class UpdatesComponent implements OnChanges {
           },
           error: (error) => {
             console.error('Error editing laptop:', error);
+            // Show an alert with the message from the backend
+            alert(error.message || 'An error occurred while editing the laptop.');
           },
         });
     }

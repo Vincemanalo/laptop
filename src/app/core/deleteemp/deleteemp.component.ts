@@ -36,6 +36,7 @@ interface Employee {
 export class DeleteEmpComponent implements OnChanges {
   @Input() selectedEmployee: any = {}; // Changed from selectedLaptop
   @Output() closeModalEvent = new EventEmitter<void>();
+  @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to refresh table
 
   deleteEmployeeForm: FormGroup; // Changed from deleteLaptopForm
   isDeleteModalOpen: boolean = true;
@@ -94,9 +95,11 @@ export class DeleteEmpComponent implements OnChanges {
     const employeeId = this.deleteEmployeeForm.value._id;
     console.log('Deleting Employee with ID:', employeeId);
 
-    this.featuresService.deleteEmployee(employeeId).subscribe({
+    this.featuresService.disableEmployee(employeeId).subscribe({
       next: (response) => {
         console.log('Employee deleted successfully:', response);
+        this.refreshTableEvent.emit(); // Notify parent to refresh table data
+
         this.closeModal(); // Close modal after deletion
       },
       error: (error) => {
