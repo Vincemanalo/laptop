@@ -80,10 +80,7 @@ export class DeleteEmpComponent implements OnChanges {
       this.deleteEmployeeForm.patchValue({
         employeeName: this.selectedEmployee.employeeName || '',
         employmentDate: this.selectedEmployee.employmentDate || '',
-        email: this.selectedEmployee.email || '',
-        contact: this.selectedEmployee.contact || '',
-        position: this.selectedEmployee.position || '',
-        address: this.selectedEmployee.address || '',
+        employmentPeriod: this.selectedEmployee.employmentPeriod || '',
       });
     }
   }

@@ -10,15 +10,13 @@
           <div class="search-container">
             <input matInput type="text" placeholder="Search..." class="search-input" [(ngModel)]="searchKeyword" />
             <button class="search-btn" (click)="onSearch()">
-              <mat-icon class="search-btn" aria-hidden="false" aria-label="Example home icon"
-                fontIcon="search"></mat-icon>
+              <mat-icon class="search-btn" aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon>
             </button>
           </div>
         </div>
+
         <div class="table-container">
-
           <table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
-
             <ng-container matColumnDef="employeeName">
               <th mat-header-cell *matHeaderCellDef>Employee Name</th>
               <td mat-cell *matCellDef="let employee">
@@ -43,8 +41,7 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let employee" class="actionbtn">
-
-                <button class="actionbtn" mat-button color="primary" (click)="openeditempModal(employee)">
+                <button class="actionbtn" mat-button color="primary" (click)="openModalInfoEmp(employee)">
                   <mat-icon class="custom-info-icon">info</mat-icon>
                 </button>
                 <button class="actionbtn" mat-button color="primary" (click)="openeditempModal(employee)">
@@ -63,7 +60,18 @@
       </div>
     </div>
   </section>
-  <app-addemp *ngIf="isModalOpen" (closeModalEvent)="closeModal()"></app-addemp>
-  <app-updatesemp *ngIf="iseditempModalOpen" (closeModalEvent)="iseditempModalOpen = false"></app-updatesemp>
+
+  <!-- Modals -->
+  <app-addemp *ngIf="isModalOpen" (employeeAdded)="closeaddemp()" (closeModalEvent)="closeModal()"></app-addemp>
+  
+  <app-modalinfoemp *ngIf="isModalInfoEmpOpen" (closeModalEvent)="isModalInfoEmpOpen = false"></app-modalinfoemp>
+
+  <app-updatesemp
+    *ngIf="iseditempModalOpen && selectedemployee"
+    [selectedEmployee]="selectedemployee"
+    (closeModalEvent)="closeeditempModal()"
+    (refreshTableEvent)="getEmployees()">
+  </app-updatesemp>
+
   <app-deleteemp *ngIf="isDeleteModalOpen" (closeModalEvent)="isDeleteModalOpen = false"></app-deleteemp>
 </main>

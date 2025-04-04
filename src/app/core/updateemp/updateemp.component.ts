@@ -17,9 +17,9 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FeaturesService } from '../../features/features.service';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -29,6 +29,7 @@ interface Employee {
   employmentDate: Date;
   employmentPeriod: string;
   status: string;
+  selectedEmployee: any;
 }
 
 @Component({
@@ -42,71 +43,71 @@ interface Employee {
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   templateUrl: './updateemp.component.html',
   styleUrls: ['./updateemp.component.css'],
   standalone: true,
 })
 export class UpdatesEmpComponent implements OnChanges {
-  @Input() selectedEmployee: any = {}; // Receive data from parent component
+  @Input() selectedEmployee: any = {}; // Data passed from the parent component
   @Output() closeModalEvent = new EventEmitter<void>();
-  @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to parent
-  employees: Employee[] = []; // Store employees
-  //  data
-  selectedEmployeeId: string = ''; // Store selected employee ID
+  @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to refresh table
+
+  employees: Employee[] = []; // Store employees if needed elsewhere
+  selectedEmployeeId: string = ''; // (Optional) Store selected employee ID
   editEmployeeForm!: FormGroup;
   isEditModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false; // For Add Employee modal
   newEmployee: string = '';
 
-  locations: string[] = ['New Office', '1NK Center']; // Example locations
-  ngOnInit(): void {
-    this.getEmployees();
-  }
-
-  // Fetch employees from backend
-  getEmployees(): void {
-    this.featuresService.getAllEmployee().subscribe({
-      next: (response) => {
-        this.employees = response;
-        console.log('Employees fetched:', this.employees);
-      },
-      error: (error) => console.error('Error fetching employees:', error),
-    });
-  }
+  displayedColumns: string[] = [
+    'employeeName',
+    'employmentDate',
+    'employmentPeriod',
+    'actions',
+  ];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private featuresService: FeaturesService
   ) {
+    // Define the form with form controls that correspond to the backend data
     this.editEmployeeForm = this.fb.group({
       employeeName: ['', Validators.required],
       employmentDate: ['', Validators.required],
+      employmentPeriod: ['', Validators.required],
     });
   }
 
+  // If the selectedEmployee input changes, update the form
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedEmployee'] && this.selectedEmployee) {
-      this.updateForm();
+    if (changes['selectedEmployee']) {
+      console.log('selectedEmployee changed:', this.selectedEmployee);
+      if (this.selectedEmployee) {
+        this.updateForm();
+      }
     }
   }
-
+    // Update the form fields with the backend data
   updateForm() {
     if (this.selectedEmployee) {
       this.editEmployeeForm.patchValue({
         employeeName: this.selectedEmployee.employeeName || '',
         employmentDate: this.selectedEmployee.employmentDate || '',
-        });
+        employmentPeriod: this.selectedEmployee.employmentPeriod || '',
+      });
     }
   }
 
+  // Close the modal
   closeModal() {
     this.isEditModalOpen = false;
     this.closeModalEvent.emit();
   }
 
+  // Optionally open or close additional modals if you have add employee logic
   openEditEmployeeModal() {
     this.isEditModalOpen = true;
   }
@@ -124,6 +125,7 @@ export class UpdatesEmpComponent implements OnChanges {
     }
   }
 
+  // When the form is submitted, call the updateEmployee method from your service
   onSubmit() {
     if (this.editEmployeeForm.valid) {
       const employeeData = this.editEmployeeForm.value;
@@ -135,7 +137,7 @@ export class UpdatesEmpComponent implements OnChanges {
           next: (response) => {
             console.log(this.selectedEmployee._id);
             console.log('Employee edited successfully:', response);
-            this.refreshTableEvent.emit(); // Emit event to refresh table
+            this.refreshTableEvent.emit(); // Notify parent to refresh table data
             this.closeModal();
           },
           error: (error) => {

@@ -11,8 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { UpdatesComponent } from '../../core/updates/updates.component';
 import { DeleteComponent } from '../../core/delete/delete.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ModalinfoComponent } from '../../core/modalinfo/modalinfo.component';
-import { DialogModule } from '@angular/cdk/dialog';
+import { ModalinfoComponent } from '../../core/modalinfo_laptop/modalinfo.component';
 
 interface Laptop {
   laptopName: string;
@@ -38,9 +37,7 @@ interface Laptop {
     MatDialogModule,
     FormsModule,
     MatPaginatorModule,
-    ModalinfoComponent,
-    DialogModule,
-    MatDialog
+    ModalinfoComponent
   ],
   templateUrl: './laptop.component.html',
   styleUrls: ['./laptop.component.css'],
@@ -60,13 +57,14 @@ export class LaptopComponent implements OnInit {
 
   laptops: Laptop[] = [];
   isModalOpen = false;
+  isModalinfoOpen = false;
   isEditModalOpen = false;
   isDeleteModalOpen = false;
   searchKeyword = '';
   pageNo = 1;
   pageSize = 10;
   isEditMode: any;
-  selectedLaptop: any = {}; // Ensure it's never undefined
+  selectedLaptop: any;
 
   employees: any[] = []; // Store employee data
   employeeMap: { [key: string]: string } = {}; // Map for quick lookup
@@ -154,7 +152,6 @@ getEmployees(): void {
   openModal(laptop?: any) {
     this.isModalOpen = true;
     if (laptop) {
-      // Handle the laptop data if needed
     }
   }
 
@@ -163,6 +160,18 @@ getEmployees(): void {
     this.getLaptops();
   }
 
+  openModalinfo(laptop?: any) {
+    console.log('Info button clicked');
+    this.isModalinfoOpen = true;
+    this.selectedLaptop = laptop;
+    console.log('Selected Laptop:', this.selectedLaptop);
+  }
+  
+  closeModalinfo(): void {
+    this.isModalinfoOpen = false;
+    this.selectedLaptop = null;
+  }
+  
   openEditModal(laptop?: any) {
     console.log('Edit button clicked');
     this.isEditModalOpen = true;
@@ -183,16 +192,6 @@ getEmployees(): void {
 
   closeDeleteModal(): void {
     this.isDeleteModalOpen = false;
-  }
-
-  openModalInfo(laptop: any): void {
-    this.dialog.open(ModalinfoComponent, {
-      data: laptop,
-      width: '90vw',  // 90% of the viewport width
-      height: '90vh', // 90% of the viewport height
-      maxWidth: 'none', // Ensures it doesn't shrink due to Material's default max width
-      panelClass: 'full-screen-modal' // Optional: custom styles
-    });
   }
 
   onSearch(): void {

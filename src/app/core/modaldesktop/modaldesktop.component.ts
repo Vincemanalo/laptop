@@ -16,7 +16,7 @@ interface Employee {
   desktopSerialNumber: string;
   desktopPurchaseDate: Date;
   assignedTo: string;
-  laptopCondition: string;
+  desktopCondition: string;
   employeeName: string;
   status: string;
 }
@@ -80,7 +80,7 @@ export class ModalDesktopComponent {
       desktopSerialNumber: ["", Validators.required],
       desktopPurchaseDate: ["", Validators.required],
       assignedTo: ["", [Validators.maxLength(50)]],
-      laptopCondition: ["", Validators.required],
+      desktopCondition: ["", Validators.required],
     });
   }
 

@@ -97,23 +97,7 @@ export class DeleteComponent implements OnChanges {
     this.isDeleteModalOpen = false;
     this.closeModalEvent.emit();
   }
-
-  // openAddEmployeeModal() {
-  //   this.isAddEmployeeOpen = true;
-  // }
-
-  // closeAddEmployeeModal() {
-  //   this.isAddEmployeeOpen = false;
-  //   this.newEmployee = '';
-  // }
-
-  // addEmployee() {
-  //   if (this.newEmployee) {
-  //     console.log('New Employee:', this.newEmployee);
-  //     this.closeAddEmployeeModal();
-  //   }
-  // }
-
+  
   onSubmit() {
     const laptopId = this.deleteLaptopForm.value._id;
     console.log('Deleting Laptop with ID:', laptopId);
