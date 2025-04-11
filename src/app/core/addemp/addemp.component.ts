@@ -112,6 +112,7 @@ export class AddempComponent {
       this.featuresService.addEmployee(employeesdata).subscribe({
         next: (response: any) => {
           console.log('Employee added successfully:', response);
+          alert(response.message || 'Employee added successfully.');
           this.employeeAdded.emit();  // Notify parent component if needed
           this.closeModal();
         },

@@ -49,9 +49,10 @@
       <a mat-list-item routerLink="/main/user-management"
         ><mat-icon>badge</mat-icon> <strong>Employees</strong></a
       >
-      <a mat-list-item routerLink="/login"
-        ><mat-icon>logout</mat-icon> <strong>Logout</strong></a
-      >
+      <a mat-list-item routerLink="/login" (click)="logout()">
+        <mat-icon>logout</mat-icon> <strong>Logout</strong>
+      </a>
+      
     </mat-nav-list>
   </mat-sidenav>
 

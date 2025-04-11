@@ -27,20 +27,20 @@ interface Employee {
 }
 
 @Component({
-  selector: 'app-delete',
+  selector: 'app-delete-desktop',
   imports: [ReactiveFormsModule, CommonModule, MatIconModule, FormsModule],
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css'],
+  templateUrl: './delete-desktop.component.html',
+  styleUrls: ['./delete-desktop.component.css'],
   standalone: true,
 })
-export class DeleteComponent implements OnChanges {
-  @Input() selectedLaptop: any = {}; // Receive data from parent component
+export class DeleteDesktopComponent implements OnChanges {
+  @Input() selectedDesktop: any = {}; // Receive data from parent component
   @Output() closeModalEvent = new EventEmitter<void>();
   @Output() refreshTableEvent = new EventEmitter<void>(); // Emit event to p
   employees: Employee[] = []; // Store employees data
   selectedEmployeeId: string = ''; 
 
-  deleteLaptopForm: FormGroup;
+  deleteDesktopForm: FormGroup;
   isDeleteModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false; // For Add Employee modal
   newEmployee: string = '';
@@ -66,29 +66,32 @@ export class DeleteComponent implements OnChanges {
     private router: Router,
     private featuresService: FeaturesService
   ) {
-    this.deleteLaptopForm = this.fb.group({
+    this.deleteDesktopForm = this.fb.group({
       _id: [''], // Hidden field to store laptop ID
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedLaptop'] && this.selectedLaptop) {
-      this.deleteLaptopForm.patchValue({
-        _id: this.selectedLaptop._id, // Set the ID in the form
+    if (changes['selectedDesktop'] && this.selectedDesktop) {
+      this.deleteDesktopForm.patchValue({
+        _id: this.selectedDesktop._id, // Set the ID in the form
       });
     }
   }
 
   updateForm() {
-    if (this.selectedLaptop) {
-      this.deleteLaptopForm.patchValue({
-        laptopName: this.selectedLaptop.laptopName || '',
-        laptopSerialNumber: this.selectedLaptop.laptopSerialNumber || '',
-        laptopDescription: this.selectedLaptop.laptopDescription || '',
-        laptopPurchaseDate: this.selectedLaptop.laptopPurchaseDate || '',
-        laptopLocation: this.selectedLaptop.laptopLocation || '',
-        laptopAssignedTo: this.selectedLaptop.laptopAssignedTo || '',
-        laptopCondition: this.selectedLaptop.laptopCondition || '',
+    if (this.selectedDesktop) {
+      this.deleteDesktopForm.patchValue({
+        desktopName: this.selectedDesktop.desktopName || '',
+        desktopSerialNumber: this.selectedDesktop.desktopSerialNumber || '',
+        desktopModel: this.selectedDesktop.desktopModel || '',
+        desktopProcessor: this.selectedDesktop.desktopProcessor || '',
+        desktopRam: this.selectedDesktop.desktopRam || '',
+        desktopStorage: this.selectedDesktop.desktopStorage || '',
+        desktopPurchaseDate: this.selectedDesktop.desktopPurchaseDate || '',
+        desktopLocation: this.selectedDesktop.desktopLocation || '',
+        desktopAssignedTo: this.selectedDesktop.desktopAssignedTo || '',
+        desktopCondition: this.selectedDesktop.desktopCondition || '',
       });
     }
   }
@@ -99,20 +102,20 @@ export class DeleteComponent implements OnChanges {
   }
   
   onSubmit() {
-    const laptopId = this.deleteLaptopForm.value._id;
-    console.log('Deleting Laptop with ID:', laptopId);
+    const desktopId = this.deleteDesktopForm.value._id;
+    console.log('Deleting Desktop with ID:', desktopId);
 
-    this.featuresService.disableLaptop(laptopId).subscribe({
+    this.featuresService.disableDesktop(desktopId).subscribe({
       next: (response) => {
-        console.log('Laptop deleted successfully:', response);
-        alert(response.message || 'Laptop deleted successfully.');
+        console.log('Desktop deleted successfully:', response);
+        alert(response.message || 'Desktop deleted successfully.');
 
         this.refreshTableEvent.emit(); // Emit event to refresh table
 
         this.closeModal(); // Close modal after deletion
       },
       error: (error) => {
-        console.error('Error deleting laptop:', error);
+        console.error('Error deleting desktop:', error);
       },
     });
   }

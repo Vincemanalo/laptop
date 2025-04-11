@@ -98,6 +98,7 @@ export class DeleteEmpComponent implements OnChanges {
     this.featuresService.disableEmployee(employeeId).subscribe({
       next: (response) => {
         console.log('Employee deleted successfully:', response);
+        alert(response.message || 'Employee deleted successfully.');
         this.refreshTableEvent.emit(); // Notify parent to refresh table data
 
         this.closeModal(); // Close modal after deletion

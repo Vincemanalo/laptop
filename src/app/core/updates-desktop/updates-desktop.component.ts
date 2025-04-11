@@ -32,7 +32,7 @@ interface Employee {
 }
 
 @Component({
-  selector: 'app-updates',
+  selector: 'app-updates-desktop',
   imports: [ReactiveFormsModule,
     CommonModule,
     MatIconModule,
@@ -44,18 +44,18 @@ interface Employee {
     MatNativeDateModule,
 
   ],
-  templateUrl: './updates.component.html',
-  styleUrls: ['./updates.component.css'],
+  templateUrl: './updates-desktop.component.html',
+  styleUrls: ['./updates-desktop.component.css'],
   standalone: true,
 })
-export class UpdatesComponent implements OnChanges {
-  @Input() selectedLaptop: any = {}; // Receive data from parent component
+export class UpdatesDesktopComponent implements OnChanges {
+  @Input() selectedDesktop: any = {}; // Receive data from parent component
   @Output() closeModalEvent = new EventEmitter<void>();
   @Output() refreshTableEvent = new EventEmitter<void>(); //
   //  Emit event to p
   employees: Employee[] = []; // Store employees data
   selectedEmployeeId: string = ''; // Store selected employee ID
-  editLaptopForm: FormGroup;
+  editDesktopForm: FormGroup;
   isEditModalOpen: boolean = true;
   isAddEmployeeOpen: boolean = false; // For Add Employee modal
   newEmployee: string = '';
@@ -81,33 +81,39 @@ export class UpdatesComponent implements OnChanges {
     private router: Router,
     private featuresService: FeaturesService
   ) {
-    this.editLaptopForm = this.fb.group({
-      laptopName: ['', Validators.required],
-      laptopSerialNumber: ['', Validators.required],
-      laptopDescription: ['', [Validators.maxLength(50)]],
-      laptopPurchaseDate: ['', Validators.required],
-      laptopLocation: ['', Validators.required],
-      laptopAssignedTo: [''],
-      laptopCondition: ['', Validators.required],
+    this.editDesktopForm = this.fb.group({
+      desktopName: ['', Validators.required],
+      desktopSerialNumber: ['', Validators.required],
+      desktopModel: ['', [Validators.maxLength(50)]],
+      desktopProcessor: ['', Validators.required],
+      desktopRam: ['', Validators.required],
+      desktopStorage: ['', Validators.required],
+      desktopPurchaseDate: ['', Validators.required],
+      desktopLocation: ['', Validators.required],
+      desktopAssignedTo: [''],
+      desktopCondition: ['', Validators.required],
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedLaptop'] && this.selectedLaptop) {
+    if (changes['selectedDesktop'] && this.selectedDesktop) {
       this.updateForm();
     }
   }
 
   updateForm() {
-    if (this.selectedLaptop) {
-      this.editLaptopForm.patchValue({
-        laptopName: this.selectedLaptop.laptopName || '',
-        laptopSerialNumber: this.selectedLaptop.laptopSerialNumber || '',
-        laptopDescription: this.selectedLaptop.laptopDescription || '',
-        laptopPurchaseDate: this.selectedLaptop.laptopPurchaseDate || '',
-        laptopLocation: this.selectedLaptop.laptopLocation || '',
-        laptopAssignedTo: this.selectedLaptop.laptopAssignedTo || '',
-        laptopCondition: this.selectedLaptop.laptopCondition || '',
+    if (this.selectedDesktop) {
+      this.editDesktopForm.patchValue({
+        desktopName: this.selectedDesktop.desktopName || '',
+        desktopSerialNumber: this.selectedDesktop.desktopSerialNumber || '',
+        desktopModel: this.selectedDesktop.desktopModel || '',
+        desktopProcessor: this.selectedDesktop.desktopProcessor || '',
+        desktopRam: this.selectedDesktop.desktopRam || '',
+        desktopStorage: this.selectedDesktop.desktopStorage || '',
+        desktopPurchaseDate: this.selectedDesktop.desktopPurchaseDate || '',
+        desktopLocation: this.selectedDesktop.desktopLocation || '',
+        desktopAssignedTo: this.selectedDesktop.desktopAssignedTo || '',
+        desktopCondition: this.selectedDesktop.desktopCondition || '',
 
       });
     }
@@ -147,30 +153,30 @@ export class UpdatesComponent implements OnChanges {
 
   onConditionChange(event: MatSelectChange) {
     if (event && event.value) {
-      console.log('Laptop Condition changed to:', event.value);
-      this.editLaptopForm.patchValue({ laptopCondition: event.value });
+      console.log('Desktop Condition changed to:', event.value);
+      this.editDesktopForm.patchValue({ desktopCondition: event.value });
     }
   }
 
   onSubmit() {
-    if (this.editLaptopForm.valid) {
-      const laptopData = this.editLaptopForm.value;
-      console.log('Submitting:', laptopData);
+    if (this.editDesktopForm.valid) {
+      const desktopData = this.editDesktopForm.value;
+      console.log('Submitting:', desktopData);
   
       this.featuresService
-        .updateLaptop(this.selectedLaptop._id, laptopData)
+        .updateDesktop(this.selectedDesktop._id, desktopData)
         .subscribe({
           next: (response) => {
-            console.log(this.selectedLaptop._id);
-            console.log('Laptop edited successfully:', response);
-            alert(response.message || 'Laptop edited successfully.');
+            console.log(this.selectedDesktop._id);
+            console.log('Desktop edited successfully:', response);
+            alert(response.message || 'Desktop edited successfully.');
             this.refreshTableEvent.emit(); // Emit event to refresh table
             this.closeModal();
           },
           error: (error) => {
-            console.error('Error editing laptop:', error);
+            console.error('Error editing desktop:', error);
             // Show an alert with the message from the backend
-            alert(error.message || 'An error occurred while editing the laptop.');
+            alert(error.message || 'An error occurred while editing the desktop.');
           },
         });
     }

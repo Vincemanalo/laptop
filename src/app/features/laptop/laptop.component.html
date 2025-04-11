@@ -1,4 +1,4 @@
-<main id="main-content">
+<main id="main-content"> 
   <section class="table-add-laptop">
     <div class="parent-container">
       <div class="dashboard-card">
@@ -15,8 +15,8 @@
                 fontIcon="search"></mat-icon>
             </button>
           </div>
-
         </div>
+
         <div class="table-container">
           <table mat-table class="mat-elevation-z8" [dataSource]="laptops">
             <ng-container matColumnDef="laptopName">
@@ -81,24 +81,31 @@
               </td>
             </ng-container>
 
-            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-            </mat-paginator>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
+
+          <mat-paginator
+            [length]="totalRecords"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPageChange($event)">
+          </mat-paginator>
         </div>
       </div>
     </div>
   </section>
+
   <app-modal *ngIf="isModalOpen" (closeModalEvent)="closeModal()"></app-modal>
   <app-modalinfo
-  *ngIf="isModalinfoOpen"
-  [selectedLaptop]="selectedLaptop"
-  (closeModalEvent)="closeModalinfo()"
-></app-modalinfo>
+    *ngIf="isModalinfoOpen"
+    [selectedLaptop]="selectedLaptop"
+    (closeModalEvent)="closeModalinfo()">
+  </app-modalinfo>
   <app-updates *ngIf="isEditModalOpen" [selectedLaptop]="selectedLaptop" (refreshTableEvent)="getLaptops()"
-    (closeModalEvent)="closeEditModal()"></app-updates>
+    (closeModalEvent)="closeEditModal()">
+  </app-updates>
   <app-delete *ngIf="isDeleteModalOpen" [selectedLaptop]="selectedLaptop" (refreshTableEvent)="getLaptops()"
-    (closeModalEvent)="closeDeleteModal()"></app-delete>
+    (closeModalEvent)="closeDeleteModal()">
+  </app-delete>
 </main>

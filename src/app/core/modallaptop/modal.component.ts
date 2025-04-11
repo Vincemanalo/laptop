@@ -127,6 +127,7 @@ export class ModalComponent {
       this.featuresService.addLaptop(laptopData).subscribe({
         next: (response) => {
           console.log("Laptop added successfully:", response);
+          alert(response.message || 'Laptop added successfully.');
           this.closeModal();
         },
         error: (error) => {

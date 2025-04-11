@@ -137,6 +137,7 @@ export class UpdatesEmpComponent implements OnChanges {
           next: (response) => {
             console.log(this.selectedEmployee._id);
             console.log('Employee edited successfully:', response);
+            alert(response.message || 'Employee updated successfully.');
             this.refreshTableEvent.emit(); // Notify parent to refresh table data
             this.closeModal();
           },

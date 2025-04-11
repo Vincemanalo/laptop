@@ -10,19 +10,16 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
 
-
 interface Employee {
   _id: string;
-  desktopSerialNumber: string;
-  desktopPurchaseDate: Date;
-  assignedTo: string;
-  desktopCondition: string;
   employeeName: string;
+  employmentDate: Date;
+  employmentPeriod: string;
   status: string;
 }
 
 @Component({
-  selector: "app-modal-desktop",
+  selector: "app-modal",
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -77,9 +74,15 @@ export class ModalDesktopComponent {
     private featuresService: FeaturesService
   ) {
     this.editDesktopForm = this.fb.group({
+      desktopName: ["", Validators.required],
       desktopSerialNumber: ["", Validators.required],
+      desktopModel: ["", [Validators.maxLength(50)]],
+      desktopProcessor: ["", Validators.required],
+      desktopRam: ["", Validators.required],
+      desktopStorage: ["", Validators.required],
       desktopPurchaseDate: ["", Validators.required],
-      assignedTo: ["", [Validators.maxLength(50)]],
+      desktopLocation: ["", Validators.required],
+      desktopAssignedTo: [null, Validators.required],
       desktopCondition: ["", Validators.required],
     });
   }
@@ -114,18 +117,21 @@ export class ModalDesktopComponent {
 
   onSubmit() {
     if (this.editDesktopForm.valid) {
-      const DesktopData = this.editDesktopForm.value;
-      console.log("Submitting:", DesktopData);
-
-      this.featuresService.addLaptop(DesktopData).subscribe({
+      const desktopData = this.editDesktopForm.value;
+      console.log("Submitting:", desktopData);
+  
+      this.featuresService.addDesktop(desktopData).subscribe({
         next: (response) => {
           console.log("Desktop added successfully:", response);
+          alert(response.message || 'Desktop added successfully.');
           this.closeModal();
         },
         error: (error) => {
-          console.error("Error adding Desktop:", error);
+          console.error("Error adding desktop:", error);
+          // Show alert with message from backend
+          alert(error.message || 'An unexpected error occurred.');
         },
       });
     }
-  }
+  }  
 }

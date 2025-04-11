@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalDesktopComponent } from './modaldesktop.component';
+import { UpdatesDesktopComponent } from './updates-desktop.component';
 
-describe('ModalComponent', () => {
-  let component: ModalDesktopComponent;
-  let fixture: ComponentFixture<ModalDesktopComponent>;
+describe('UpdatesDesktopComponent', () => {
+  let component: UpdatesDesktopComponent;
+  let fixture: ComponentFixture<UpdatesDesktopComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalDesktopComponent]
+      imports: [UpdatesDesktopComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ModalDesktopComponent);
+    fixture = TestBed.createComponent(UpdatesDesktopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

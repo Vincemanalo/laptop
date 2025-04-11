@@ -31,6 +31,13 @@ body {
   width: 65%;
 }
 
+.error{
+  margin-top: 30px;
+  color: red;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
 .logo {
   width: 250px;
   height: auto;

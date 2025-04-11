@@ -17,8 +17,8 @@
   border-radius: 10px;
   padding: 30px;
   max-width: 900px;
-  width: 30%;
-  height: 40%;
+  width: 40%;
+  height: 32%;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.3s ease-out;
@@ -128,8 +128,8 @@ button[type="submit"]:disabled {
 
 /* Add Employee Modal Specific Styles */
 .modal-content h2 {
-  font-size: 30px;
-  margin-bottom: 50px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .form-group input {

@@ -63,80 +63,66 @@ export class LaptopComponent implements OnInit {
   searchKeyword = '';
   pageNo = 1;
   pageSize = 10;
+  totalRecords = 0;
+  totalPages = 1;
   isEditMode: any;
   selectedLaptop: any;
 
-  employees: any[] = []; // Store employee data
-  employeeMap: { [key: string]: string } = {}; // Map for quick lookup
+  employees: any[] = [];
+  employeeMap: { [key: string]: string } = {};
 
   constructor(private FeaturesService: FeaturesService) {}
 
   ngOnInit(): void {
-    this.getEmployees(); // Fetch employees first
+    this.getEmployees();
     this.getLaptops();
   }
 
-  // Single getLaptops method: fetch from API and filter based on searchKeyword
   getLaptops(): void {
-    this.FeaturesService.getAllLaptop().subscribe({
+    this.FeaturesService.getAllLaptop(this.pageNo, this.pageSize, this.searchKeyword).subscribe({
       next: (response) => {
         console.log('API Response:', response);
-
         if (response && response.laptops) {
-          // Use the helper filter function to filter the laptops
           this.laptops = response.laptops.filter((laptop: Laptop) =>
             this.filterLaptops(laptop)
           );
+          this.totalRecords = response.totalRecords;
+          this.totalPages = response.totalPages;
         } else {
           this.laptops = [];
         }
-
         console.log('Filtered Laptops:', this.laptops);
       },
       error: (error) => console.error('Error fetching laptops:', error),
     });
   }
 
-  // Fetch all employees and create a map of ID -> Name
-getEmployees(): void {
-  this.FeaturesService.getAllEmployee().subscribe({
-    next: (response) => {
-      console.log('Employees response:', response);
+  getEmployees(): void {
+    this.FeaturesService.getAllEmployee().subscribe({
+      next: (response) => {
+        console.log('Employees response:', response);
+        const employeeArray = response?.employees ?? [];
+        console.log('Employee Array:', employeeArray);
+        this.employees = employeeArray;
+        this.employeeMap = employeeArray.reduce(
+          (map: { [key: string]: string }, employee: { _id: string; employeeName: string }) => {
+            map[employee._id] = employee.employeeName;
+            return map;
+          },
+          {}
+        );
+        console.log('Employee Map:', this.employeeMap);
+      },
+      error: (error) => console.error('Error fetching employees:', error),
+    });
+  }
 
-      // Ensure we are extracting employees correctly
-      const employeeArray = response?.employees ?? []; // Correctly access 'employees'
-      console.log('Employee Array:', employeeArray);
-
-      // Store employees array for *ngFor
-      this.employees = employeeArray;
-
-      // Create a map of employee ID -> employeeName
-      this.employeeMap = employeeArray.reduce(
-        (map: { [key: string]: string }, employee: { _id: string; employeeName: string }) => {
-          map[employee._id] = employee.employeeName;
-          return map;
-        },
-        {}
-      );
-
-      console.log('Employee Map:', this.employeeMap);
-    },
-    error: (error) => console.error('Error fetching employees:', error),
-  });
-}
-
-    
-  // Helper method to get Employee Name from ID
   getEmployeeName(_id: string): string {
     return this.employeeMap[_id] || 'Unknown';
   }
 
-  // Search filter function
   filterLaptops(laptop: Laptop): boolean {
-    if (!this.searchKeyword.trim()) {
-      return true; // If no search keyword, return all laptops
-    }
-
+    if (!this.searchKeyword.trim()) return true;
     const keyword = this.searchKeyword.trim().toLowerCase();
     return (
       laptop.laptopName.toLowerCase().includes(keyword) ||
@@ -151,8 +137,7 @@ getEmployees(): void {
 
   openModal(laptop?: any) {
     this.isModalOpen = true;
-    if (laptop) {
-    }
+    if (laptop) {}
   }
 
   closeModal(): void {
@@ -166,12 +151,12 @@ getEmployees(): void {
     this.selectedLaptop = laptop;
     console.log('Selected Laptop:', this.selectedLaptop);
   }
-  
+
   closeModalinfo(): void {
     this.isModalinfoOpen = false;
     this.selectedLaptop = null;
   }
-  
+
   openEditModal(laptop?: any) {
     console.log('Edit button clicked');
     this.isEditModalOpen = true;
@@ -195,12 +180,17 @@ getEmployees(): void {
   }
 
   onSearch(): void {
-    this.pageNo = 1; // Reset to first page on search
+    this.pageNo = 1;
     this.getLaptops();
   }
 
   clearSearch(): void {
     this.searchKeyword = '';
-    // Optionally, call this.getLaptops() to refresh the data without filtering.
+  }
+
+  onPageChange(event: any): void {
+    this.pageNo = event.pageIndex + 1;  // Update pageNo (since pageIndex starts from 0)
+    this.pageSize = event.pageSize;     // Update pageSize
+    this.getLaptops();                  // Fetch the laptops for the new page
   }
 }
