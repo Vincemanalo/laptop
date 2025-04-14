@@ -1,49 +1,44 @@
-/* Reset and Base Styles */
+/* Base Styles - Kept as is */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 main {
   flex: 1;
   padding: 20px;
   transition: margin-left 0.3s ease;
 }
+
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* .search-container {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-}
-
-.search-input {
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  width: 100%;
-} */
-
+/* Search */
 .search-container {
   display: flex;
-  height: 40px;
+  flex-wrap: wrap;
   justify-content: flex-end;
   border: 1px solid gray;
   border-radius: 10px;
   align-items: center;
-  padding: 0 5px; /* Optional: Adds padding inside the container */
+  padding: 5px;
+  width: 20%;
 }
 
 .search-input {
-  width: 300px;
+  flex: 1;
+  min-width: 150px;
   margin-left: 10px;
   border: none;
-  outline: none; /* Removes blue outline when clicked */
+  outline: none;
+  height: 30px;
 }
 
 .search-btn {
@@ -52,13 +47,14 @@ main {
   border: none;
   cursor: pointer;
   font-size: 1.6rem;
-  display: flex; /* Add this */
-  align-items: center; /* Center icon vertically */
-  height: 100%; /* Match container height */
+  display: flex;
+  align-items: center;
+  height: 100%;
   margin-left: 5px;
-  padding: 0; /* Remove default button padding */
+  padding: 0;
 }
 
+/* Card */
 .dashboard-card {
   width: 100%;
   background-color: white;
@@ -68,6 +64,7 @@ main {
   margin-top: 5rem;
 }
 
+/* Table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -90,8 +87,7 @@ th {
   letter-spacing: 0.5px;
 }
 
-th,
-td {
+th, td {
   text-align: center;
   border-top: 1px solid rgb(145, 145, 145);
   border-left: 1px solid rgb(145, 145, 145);
@@ -111,103 +107,17 @@ tr:hover {
   transition: background 0.3s ease-in-out;
 }
 
-td:first-child,
-th:first-child {
+td:first-child, th:first-child {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
 
-td:last-child,
-th:last-child {
+td:last-child, th:last-child {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
-@media (max-width: 414px) {
-  table {
-    font-size: 0.9rem;
-  }
-
-  th,
-  td {
-    padding: 12px;
-  }
-
-  .table-container {
-    overflow-x: auto;
-  }
-
-  .search-container {
-    max-width: 150px;
-  }
-
-  .search-input {
-    max-width: 100px;
-  }
-
-  .add-button {
-    width: auto;
-  }
-
-  .add-button p {
-    font-size: 0.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  table {
-    font-size: 0.9rem;
-  }
-
-  th,
-  td {
-    padding: 12px;
-  }
-
-  .table-container {
-    overflow-x: auto;
-  }
-
-  .search-container {
-    max-width: 150px;
-  }
-
-  .search-input {
-    max-width: 100px;
-  }
-
-  .add-button {
-    width: auto;
-  }
-}
-
-@media (max-width: 2000px) {
-  table {
-    font-size: 0.9rem;
-  }
-
-  th,
-  td {
-    padding: 12px;
-  }
-
-  .table-container {
-    overflow-x: auto;
-  }
-  .search-container {
-    max-width: 300px;
-  }
-
-  .search-input {
-    max-width: 200px;
-  }
-
-  .add-button {
-    width: auto;
-  }
-}
-
-/* Styling the action buttons container (applied directly to the button element) */
+/* Buttons */
 .actionbtn {
   display: inline-flex;
   align-items: center;
@@ -216,22 +126,19 @@ th:last-child {
   width: 100%;
 }
 
-/* Make the icons larger and remain centered */
 .actionbtn mat-icon {
-  font-size: 25px !important;  /* Icon remains big */
-  width: 25px;                 /* Adjusted width to match font size */
+  font-size: 25px !important;
+  width: 25px;
   height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Adjust spacing between adjacent action buttons */
 .actionbtn + .actionbtn {
-  margin-left: 4px;  /* Slight gap between buttons */
+  margin-left: 4px;
 }
 
-/* Hover effect on the button */
 .actionbtn:hover {
   background-color: rgba(0, 92, 187, 0.1);
   transition: background 0.3s ease-in-out;
@@ -254,6 +161,7 @@ th:last-child {
   margin-left: 10px;
 }
 
+/* Modal */
 .modal button {
   background: var(--color2);
   color: black;
@@ -267,8 +175,7 @@ th:last-child {
   margin: 20px auto 20px 0;
 }
 
-
-/* modalll*/
+/* Popup Form */
 .popup-form {
   position: fixed;
   top: 0;
@@ -283,22 +190,18 @@ th:last-child {
   z-index: 1000;
 }
 
-/* modal grid */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.85rem;
-  grid-column: span 2;
   background-color: white;
   padding: 20px;
 }
 
-/* Full-width elements */
 .full-width {
   grid-column: span 2;
 }
 
-/* Close modal */
 .close-btn {
   position: absolute;
   top: 1rem;
@@ -310,20 +213,18 @@ th:last-child {
   color: #999;
   transition: color 0.3s;
 }
-/* Form groups */
+
 .form-group {
   display: flex;
   flex-direction: column;
 }
 
-/* Labels */
 .form-group label {
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #555;
 }
 
-/* Inputs and Selects */
 .form-group input,
 .form-group select {
   padding: 0.75rem;
@@ -363,10 +264,98 @@ th:last-child {
   color: #fff;
 }
 
+/* Angular Material Deep Fixes */
 ::ng-deep .cdk-overlay-pane {
-  background-color: #fff !important; /* Solid white background */
+  background-color: #fff !important;
 }
 
 .mat-select-trigger {
-  background-color: #fff !important; /* Solid white background for the trigger */
+  background-color: #fff !important;
+}
+
+/* ----------------------- */
+/* RESPONSIVENESS SECTION */
+/* ----------------------- */
+
+@media (max-width: 1024px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    margin: 5px 0 0 0;
+    width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
+
+  .add-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-card {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  .add-button p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-button {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-button p {
+    margin-left: 0;
+    margin-top: 6px;
+    font-size: 0.8rem;
+  }
+
+  .search-input {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 0.85rem;
+  }
+
+  table {
+    font-size: 0.75rem;
+  }
+
+  .search-btn {
+    font-size: 1.3rem;
+  }
 }

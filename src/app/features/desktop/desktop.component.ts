@@ -19,7 +19,6 @@ interface Desktop {
   desktopName: string;
   desktopSerialNumber: string;
   desktopModel: string;
-  desktopProcessor: string;
   desktopRam: string;
   desktopStorage: string;
   desktopPurchaseDate: Date;
@@ -52,10 +51,6 @@ export class DesktopComponent implements OnInit {
   displayedColumns: string[] = [
     'desktopName',
     'desktopSerialNumber',
-    'desktopModel',
-    'desktopProcessor',
-    'desktopRam',
-    'desktopStorage',
     'desktopPurchaseDate',
     'desktopLocation',
     'desktopAssignedTo',
